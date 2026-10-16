@@ -1,0 +1,754 @@
+/* Estilos propios del sitio. Externo a propósito: permite una CSP sin 'unsafe-inline'. */
+html {
+  scroll-behavior: smooth;
+}
+
+.social-card:hover .social-icon,
+.social-card:focus-visible .social-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Foco visible para accesibilidad (teclado) en toda la web */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #d9a441;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Respeta preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Carrusel de novedades ---------- */
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-out;
+  transform: translateX(0%);
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  width: 100%;
+}
+
+/* Posiciones del carrusel vía atributo (no vía JS inline style,
+   así funciona con una CSP estricta sin 'unsafe-inline' en style-src) */
+.carousel-track[data-index="0"] {
+  transform: translateX(0%);
+}
+
+.carousel-track[data-index="1"] {
+  transform: translateX(-100%);
+}
+
+.carousel-track[data-index="2"] {
+  transform: translateX(-200%);
+}
+
+.carousel-track[data-index="3"] {
+  transform: translateX(-300%);
+}
+
+.carousel-track[data-index="4"] {
+  transform: translateX(-400%);
+}
+
+.carousel-track[data-index="5"] {
+  transform: translateX(-500%);
+}
+
+.carousel-track[data-index="6"] {
+  transform: translateX(-600%);
+}
+
+.carousel-track[data-index="7"] {
+  transform: translateX(-700%);
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #d1d5db;
+  transition: background 0.2s, width 0.2s;
+}
+
+/* Área táctil ampliada (el punto visible sigue siendo de 8px) */
+.carousel-dot {
+  position: relative;
+}
+
+.carousel-dot::after {
+  content: "";
+  position: absolute;
+  inset: -10px -5px;
+}
+
+.carousel-dot[aria-current="true"] {
+  background: #d9a441;
+  width: 22px;
+}
+
+/* ---------- Acordeón de preguntas frecuentes ---------- */
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.faq-item[data-open="true"] .faq-answer {
+  grid-template-rows: 1fr;
+}
+
+.faq-answer>div {
+  overflow: hidden;
+}
+
+.faq-item[data-open="true"] .faq-chevron {
+  transform: rotate(180deg);
+}
+
+.faq-chevron {
+  transition: transform 0.25s ease;
+}
+
+/* ==========================================
+   MENSAJERÍA JUDICIAL Y ADMINISTRATIVA
+   ========================================== */
+
+/* Revelado al hacer scroll: usado por [data-reveal] vía IntersectionObserver en main.js.
+   El desfase (stagger) se resuelve por atributo, no por style="" inline, para respetar
+   la CSP estricta sin 'unsafe-inline' en style-src. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+[data-reveal][data-reveal-index="0"] {
+  transition-delay: 0ms;
+}
+
+[data-reveal][data-reveal-index="1"] {
+  transition-delay: 90ms;
+}
+
+[data-reveal][data-reveal-index="2"] {
+  transition-delay: 180ms;
+}
+
+[data-reveal][data-reveal-index="3"] {
+  transition-delay: 270ms;
+}
+
+[data-reveal][data-reveal-index="4"] {
+  transition-delay: 360ms;
+}
+
+[data-reveal][data-reveal-index="5"] {
+  transition-delay: 450ms;
+}
+
+[data-reveal][data-reveal-index="6"] {
+  transition-delay: 540ms;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Franja de "cadena de custodia": línea que conecta los pasos del proceso */
+
+/*
+@media (min-width: 768px) {
+  .mensajeria-timeline::before {
+    top: 28px;
+    left: 8%;
+    right: 8%;
+    height: 2px;
+  }
+}
+
+@media (max-width: 767px) {
+  .mensajeria-timeline::before {
+    top: 8px;
+    bottom: 8px;
+    left: 27px;
+    width: 2px;
+  }
+}
+*/
+.mensajeria-step-icon {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mensajeria-step:hover .mensajeria-step-icon {
+  transform: scale(1.12);
+  box-shadow: 0 8px 20px rgba(217, 164, 65, 0.45);
+}
+
+/* Pulso sutil en el CTA principal de la sección para llamar la atención sin ser invasivo */
+@keyframes mensajeria-pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(217, 164, 65, 0.55);
+  }
+
+  100% {
+    box-shadow: 0 0 0 14px rgba(217, 164, 65, 0);
+  }
+}
+
+.mensajeria-pulse {
+  animation: mensajeria-pulse-ring 2.2s ease-out infinite;
+}
+
+/* Ícono de escudo/confidencialidad con leve flotación */
+@keyframes mensajeria-float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.mensajeria-float {
+  animation: mensajeria-float 3.5s ease-in-out infinite;
+}
+
+/* ---------- Seguimiento en tiempo real del cadete (mapa ilustrativo) ---------- */
+.tracking-map {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  min-height: 260px;
+}
+
+@media (min-width: 768px) {
+  .tracking-map {
+    min-height: 320px;
+  }
+}
+
+.tracking-map-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.tracking-route {
+  stroke: #0c4a6e;
+  stroke-width: 4;
+  stroke-dasharray: 10 10;
+  stroke-linecap: round;
+  opacity: 0.55;
+  animation: mensajeria-route-flow 1.6s linear infinite;
+}
+
+@keyframes mensajeria-route-flow {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+.tracking-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  z-index: 2;
+}
+
+.tracking-pin--origin {
+  left: 15%;
+  top: 75%;
+}
+
+.tracking-pin--destination {
+  left: 90%;
+  top: 47%;
+}
+
+.tracking-pin-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: #0c4a6e;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  box-shadow: 0 4px 10px rgba(12, 74, 110, 0.35);
+}
+
+.tracking-pin--destination .tracking-pin-icon {
+  background: #d9a441;
+  color: #0b1320;
+  box-shadow: 0 4px 10px rgba(217, 164, 65, 0.4);
+}
+
+.tracking-pin-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #475569;
+  background: #ffffff;
+  padding: 2px 8px;
+  border-radius: 999px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+}
+
+.tracking-courier {
+  position: absolute;
+  left: 15%;
+  top: 75%;
+  transform: translate(-50%, -50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: #0b1320;
+  color: #d9a441;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  z-index: 3;
+  opacity: 0;
+  box-shadow: 0 6px 16px rgba(11, 19, 32, 0.35);
+}
+
+.tracking-courier.is-animating {
+  animation: mensajeria-courier-move 12s ease-in-out infinite;
+}
+
+.tracking-courier-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 999px;
+  border: 2px solid rgba(217, 164, 65, 0.6);
+  animation: mensajeria-pulse-ring 1.8s ease-out infinite;
+}
+
+@keyframes mensajeria-courier-move {
+  0% {
+    left: 15%;
+    top: 75%;
+    opacity: 0;
+  }
+
+  4% {
+    opacity: 1;
+  }
+
+  22% {
+    left: 29%;
+    top: 61%;
+  }
+
+  40% {
+    left: 43.3%;
+    top: 47%;
+  }
+
+  58% {
+    left: 57.5%;
+    top: 33%;
+  }
+
+  76% {
+    left: 71.7%;
+    top: 19%;
+  }
+
+  92% {
+    left: 90%;
+    top: 47%;
+    opacity: 1;
+  }
+
+  100% {
+    left: 90%;
+    top: 47%;
+    opacity: 0;
+  }
+}
+
+.tracking-step-icon,
+.tracking-step-title {
+  transition: color 0.4s ease, background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.tracking-step.is-active .tracking-step-icon {
+  box-shadow: 0 0 0 4px rgba(12, 74, 110, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .tracking-route,
+  .tracking-courier.is-animating,
+  .tracking-courier-pulse {
+    animation: none !important;
+  }
+
+  .tracking-courier {
+    opacity: 1 !important;
+    left: 50% !important;
+    top: 45% !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  [data-reveal],
+  .mensajeria-pulse,
+  .mensajeria-float,
+  .mensajeria-step-icon {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ---------- Cotizador interactivo ---------- */
+.cotizador-toggle-btn {
+  color: #64748b;
+  background: transparent;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cotizador-toggle-btn.is-active {
+  background: #ffffff;
+  color: #0c4a6e;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.cotizador-urgencia-btn {
+  border: 2px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #ffffff;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.cotizador-urgencia-btn .cotizador-urgencia-icon {
+  background: #f1f5f9;
+  color: #64748b;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.cotizador-urgencia-btn.is-active {
+  border-color: #0c4a6e;
+  background: #eff6ff;
+}
+
+.cotizador-urgencia-btn.is-active .cotizador-urgencia-icon {
+  background: #0c4a6e;
+  color: #ffffff;
+}
+
+.hero-background {
+  background-image: url('Imagenes/portada.jpeg');
+  /* Reemplaza por tu ruta local o URL */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.25;
+  /* Ajusta la transparencia entre 0.1 y 0.5 según tu preferencia */
+}
+
+.hero-mensajeria {
+  background-image: url('Imagenes/motocadete.jpeg');
+  /* Reemplaza por tu ruta local o URL */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.25;
+  /* Asegura que el contenido esté por encima del fondo */;
+}
+
+/* ==========================================
+   ESTILOS GENERALES DEL FOOTER
+   ========================================== */
+.footer {
+  background-color: #0b1320;
+  /* Color oscuro similar a tu diseño */
+  color: #94a3b8;
+  /* Móvil: padding inferior extra para que el botón flotante de WhatsApp no tape el copyright */
+  padding: 36px 20px 84px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-col h3 {
+  color: #ffffff;
+  font-size: 1.05rem;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-col p {
+  line-height: 1.6;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding: 50px 20px 20px;
+  }
+
+  .footer-container {
+    gap: 40px;
+    padding-bottom: 35px;
+  }
+
+  .footer-col h3 {
+    font-size: 1.15rem;
+    margin-bottom: 18px;
+  }
+
+  .footer-col p {
+    font-size: 0.95rem;
+  }
+}
+
+/* ==========================================
+   ANIMACIONES EN ENLACES RÁPIDOS
+   ========================================== */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 4px;
+}
+
+.footer-links a {
+  padding: 4px 0;
+}
+
+@media (min-width: 768px) {
+  .footer-links li {
+    margin-bottom: 8px;
+  }
+}
+
+.footer-links a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.875rem;
+  display: inline-block;
+  position: relative;
+  z-index: 10;
+  /* Forzar a que el enlace esté por encima de cualquier fondo */
+  cursor: pointer;
+  /* Asegurar que aparezca la "manito" al pasar el mouse */
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+/* Efecto 1: Desplazamiento hacia la derecha al pasar el mouse */
+.footer-links a:hover {
+  color: #38bdf8;
+  /* Azul brillante al hover */
+  transform: translateX(6px);
+}
+
+/* Efecto 2: Línea decorativa inferior que se expande */
+.footer-links a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background-color: #38bdf8;
+  transition: width 0.3s ease;
+  pointer-events: none;
+  /* Ignora eventos del mouse en la línea */
+}
+
+.footer-links a:hover::after {
+  width: 100%;
+}
+
+/* ==========================================
+   FORMULARIO Y BOTÓN CON ANIMACIÓN
+   ========================================== */
+.newsletter-form {
+  display: flex;
+  margin-top: 15px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.newsletter-form input {
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  outline: none;
+  flex: 1;
+  min-width: 0;
+  /* 16px en móvil: evita el zoom automático de iOS al enfocar el campo */
+  font-size: 1rem;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .newsletter-form input {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .newsletter-form button {
+    padding: 14px 20px;
+  }
+}
+
+.newsletter-form input:focus {
+  border-color: #0284c7;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.newsletter-form button {
+  padding: 12px 20px;
+  background-color: #0c4a6e;
+  /* Azul del botón */
+  color: #ffffff;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  /* Transición de iluminación y elevación */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+/* Animación hover del botón */
+.newsletter-form button:hover {
+  background-color: #0284c7;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+}
+
+.newsletter-form button:active {
+  transform: translateY(0);
+}
+
+/* ==========================================
+   PIE INFERIOR Y BOTÓN FLOTANTE (WHATSAPP)
+   ========================================== */
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* Animación para el botón flotante de WhatsApp */
+.whatsapp-float:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.5);
+}
+
+/* ==========================================
+   TIPOGRAFÍA · Inter + jerarquía responsive
+   Clases propias (cargan después de output.css, sin !important).
+   ========================================== */
+:root {
+  --font-main: "Inter", Arial, Helvetica, sans-serif;
+  --text-body: #334155;
+}
+
+/* Reemplaza el Poppins compilado en output.css (.font-sans) */
+.font-sans,
+html,
+body {
+  font-family: var(--font-main);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Títulos principales (H1 / H2 y títulos de sección) */
+.heading-title {
+  font-size: 2.25rem;
+  /* 36px */
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Subtítulos (H3 / H4) */
+.heading-subtitle {
+  font-size: 1.35rem;
+  /* 21.6px */
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* Párrafos */
+.text-body {
+  font-size: 0.875rem;
+  /* 15.2px */
+  line-height: 1.6;
+}
+
+/* Color de párrafo sobre fondos claros (no usar sobre fondos oscuros) */
+.text-body-dark {
+  color: var(--text-body);
+}
+
+@media (max-width: 768px) {
+  .heading-title {
+    font-size: 1.625rem;
+    /* 26px */
+  }
+
+  .heading-subtitle {
+    font-size: 1.15rem;
+    /* 18.4px */
+  }
+
+  .text-body {
+    font-size: 0.9rem;
+    /* 14.4px */
+    line-height: 1.55;
+  }
+}

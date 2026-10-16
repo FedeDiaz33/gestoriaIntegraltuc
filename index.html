@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestoría Integral Tucumán | Trámites automotores y administrativos</title>
+  <meta name="description"
+    content="Gestoría Integral en San Miguel de Tucumán: transferencias, patentamientos, trámites administrativos y actas. Gestión rápida, transparente y de confianza." />
+
+  <!-- SEGURIDAD: Referrer Policy -->
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- SEGURIDAD: Content Security Policy (meta tag).
+       Nota: esta CSP cubre XSS/inyección de recursos, pero NO puede fijar
+       frame-ancestors (protección anti-clickjacking) ni cabeceras como
+       X-Frame-Options, X-Content-Type-Options o HSTS: esas deben
+       configurarse en el servidor/hosting (ver README de despliegue). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
+  script-src 'self'; 
+  style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; 
+  font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; 
+  img-src 'self' data: https://images.unsplash.com; 
+  connect-src 'self'; 
+  frame-src 'none'; 
+  object-src 'none'; 
+  base-uri 'self'; 
+  form-action 'self'; 
+  upgrade-insecure-requests;" />
+
+  <link rel="apple-touch-icon" href="imagenes/JD3.svg" sizes="180x180" />
+  <link rel="icon" href="imagenes/JD3.svg" type="image/svg+xml" sizes="32x32" />
+  <!--Letras de google-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Tailwind compilado (build local, no CDN: ver tailwind.config.js). Reemplaza al Tailwind Play CDN. -->
+  <link href="./dist/output.css" rel="stylesheet" />
+  <link href="./styles.css" rel="stylesheet" />
+  <!-- Google tag (gtag.js) -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GT-NCG98WHN"> </script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'GT-NCG98WHN');
+  </script>
+</head>
+
+<body class="bg-[#F7F5F0] text-gray-800 flex flex-col min-h-screen font-sans">
+
+  <!-- Agregamos la clase animate-bounce -->
+  <a href="https://wa.me/543814963423?text=Hola!%20Me%20gustar%C3%ADa%20consultar%20por%20un%20tr%C3%A1mite."
+    target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp"
+    class="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[100] bg-green-500 text-white w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-xl hover:bg-green-600 transition-all hover:scale-110 md:animate-bounce">
+    <i class="fa-brands fa-whatsapp text-2xl md:text-3xl" aria-hidden="true"></i>
+  </a>
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-2 sm:py-3 flex justify-between items-center">
+      <button data-navigate="inicio" class="flex items-center gap-2 sm:gap-3 min-w-0">
+        <img src="Imagenes/logo2.png" alt="Logo Gestoría Integral" class="w-10 h-10 sm:w-12 sm:h-12 shrink-0" />
+        <span class="text-left">
+          <span class="block text-base sm:text-xl font-bold text-primary leading-tight whitespace-nowrap">Gestoria
+            Integral</span>
+          <span
+            class="block text-[10px] sm:text-xs text-gray-500 font-semibold tracking-[0.2em] sm:tracking-widest uppercase">Tucumán</span>
+        </span>
+      </button>
+
+      <nav class="hidden md:flex gap-6 text-sm lg:text-base" aria-label="Principal">
+        <button data-navigate="inicio" data-page="inicio"
+          class="nav-link text-primary font-medium border-b-2 border-primary pb-1">Inicio</button>
+        <button data-navigate="mensajeria" data-page="mensajeria"
+          class="nav-link text-gray-600 hover:text-primary font-medium transition-colors border-b-2 border-transparent hover:border-primary pb-1">Mensajería</button>
+        <button data-navigate="nosotros" data-page="nosotros"
+          class="nav-link text-gray-600 hover:text-primary font-medium transition-colors border-b-2 border-transparent hover:border-primary pb-1">Nosotros</button>
+        <button data-navigate="partidas" data-page="partidas"
+          class="nav-link text-gray-600 hover:text-primary font-medium transition-colors border-b-2 border-transparent hover:border-primary pb-1">Partidas
+          Urgentes</button>
+      </nav>
+
+      <button
+        class="md:hidden -mr-2 w-11 h-11 flex items-center justify-center rounded-lg text-xl text-primary hover:bg-gray-100 transition-colors"
+        data-toggle-menu aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <nav id="mobileMenu" class="hidden bg-white border-t border-gray-100 md:hidden absolute w-full shadow-lg"
+      aria-label="Menú móvil">
+      <button data-navigate="inicio" data-page="inicio"
+        class="nav-link-m block w-full text-left px-5 py-3.5 text-base font-medium border-b border-gray-100 text-primary bg-blue-50 hover:bg-gray-50">Inicio</button>
+      <button data-navigate="mensajeria" data-page="mensajeria"
+        class="nav-link-m block w-full text-left px-5 py-3.5 text-base font-medium border-b border-gray-100 text-gray-600 hover:bg-gray-50 hover:text-primary">Mensajería</button>
+      <button data-navigate="nosotros" data-page="nosotros"
+        class="nav-link-m block w-full text-left px-5 py-3.5 text-base font-medium border-b border-gray-100 text-gray-600 hover:bg-gray-50 hover:text-primary">Nosotros</button>
+      <button data-navigate="partidas" data-page="partidas"
+        class="nav-link-m block w-full text-left px-5 py-3.5 text-base font-medium border-b border-gray-100 text-gray-600 hover:bg-gray-50 hover:text-primary">Partidas
+        Urgentes</button>
+    </nav>
+  </header>
+
+  <main class="flex-grow">
+    <!-- ===== INICIO ===== -->
+    <section id="inicio" class="page-section animate-fade-in block">
+      <div class="bg-primary text-white py-10 md:py-16 lg:py-20 relative overflow-hidden">
+        <div class="absolute inset-0 hero-background" aria-hidden="true"></div>
+        <div
+          class="container mx-auto px-4 relative z-10 text-center md:text-left grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h1 class="heading-title mb-3 md:mb-4">Soluciones
+              ágiles para tus trámites</h1>
+            <p class="text-body text-blue-100 mb-6 md:mb-8">
+              Especialistas en gestiones registrales y administrativas en toda la provincia de Tucumán.<br
+                class="hidden md:block" />
+              Ahorrá tiempo y dolores de cabeza.
+            </p>
+            <a href="https://wa.me/543814963423?text=Hola!%20Me%20gustar%C3%ADa%20consultar%20por%20un%20tr%C3%A1mite."
+              target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 bg-secondary text-dark font-bold text-sm sm:text-base px-6 py-3 rounded-full shadow-lg hover:bg-yellow-400 transition-transform hover:scale-105">
+              Consultar con un agente <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Requisitos -->
+      <div class="container mx-auto px-4 py-10 md:py-16 max-w-5xl">
+        <div class="text-center mb-8 md:mb-12">
+          <h2 class="heading-title text-primary">Requisitos para cotizar</h2>
+          <div class="w-24 h-1 bg-secondary mx-auto mt-4 rounded"></div>
+        </div>
+        <div class="bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col md:flex-row">
+          <div class="md:w-1/2 p-6 sm:p-8 md:p-12 flex flex-col justify-center">
+            <h3 class="heading-subtitle mb-3 md:mb-4 text-dark">Trámites en general
+            </h3>
+            <p class="text-body text-body-dark mb-4 md:mb-6">
+              Para cotizar cualquier trámite es fundamental que nos brindes información precisa y completa. Esto nos
+              permite evaluar correctamente el proceso, identificar posibles obstáculos y ofrecerte un presupuesto
+              justo y transparente.
+            </p>
+            <p class="text-body text-body-dark mb-6 md:mb-10">
+              Incluí el tipo de trámite, la documentación que tenés a mano y cualquier información adicional que
+              consideres relevante: cuanto más nos cuentes, mejor podremos asesorarte.
+            </p>
+            <a href="https://wa.me/543814963423?text=Hola!%20Me%20gustar%C3%ADa%20consultar%20por%20un%20tr%C3%A1mite."
+              target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 bg-secondary text-dark font-bold text-sm sm:text-base px-6 py-3 rounded-full shadow-lg hover:bg-yellow-400 transition-transform hover:scale-105">
+              Consultar con un agente <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="md:w-1/2 bg-gray-200 min-h-[200px] sm:min-h-[260px] md:min-h-[300px] relative">
+            <img src="Imagenes/Cotizaciones.jpg" self="data" alt="Oficina de la gestoría"
+              class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Servicios (renderizado por JS desde main.js) -->
+      <div class="container mx-auto px-4 py-10 md:py-16">
+        <h3 class="heading-title text-center text-primary mb-8 md:mb-12">
+          Nuestros Servicios</h3>
+        <div id="servicesGrid" class="grid md:grid-cols-3 gap-4"></div>
+      </div>
+
+      <!-- Novedades: carrusel -->
+      <div class="bg-white py-10 md:py-16 border-y border-gray-100">
+        <div class="container mx-auto px-4 max-w-4xl">
+          <div class="text-center mb-6 md:mb-10">
+            <h3 class="heading-title text-primary">Novedades y Vencimientos
+            </h3>
+            <p class="text-body text-body-dark mt-2">Lo último en normativa y trámites, para que no te agarre
+              de sorpresa</p>
+          </div>
+          <div id="newsCarousel" role="region" aria-label="Carrusel de novedades" aria-roledescription="carrusel">
+            <div class="flex items-center gap-2 sm:gap-4">
+              <button type="button" data-prev aria-label="Novedad anterior"
+                class="shrink-0 w-8 h-8 sm:w-10 sm:h-10 text-xs sm:text-base rounded-full bg-gray-100 hover:bg-secondary hover:text-dark transition-colors flex items-center justify-center">
+                <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+              </button>
+              <div class="flex-1 min-w-0 overflow-hidden rounded-2xl">
+                <div class="carousel-track"></div>
+              </div>
+              <button type="button" data-next aria-label="Siguiente novedad"
+                class="shrink-0 w-8 h-8 sm:w-10 sm:h-10 text-xs sm:text-base rounded-full bg-gray-100 hover:bg-secondary hover:text-dark transition-colors flex items-center justify-center">
+                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div data-dots class="flex items-center justify-center gap-3 mt-5 md:mt-6"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reseñas -->
+      <div class="bg-white py-10 md:py-16 border-y border-gray-100">
+        <div class="container mx-auto px-4 max-w-5xl">
+          <div class="https://g.page/r/CTVOsSSo7HAXEBM/review">
+            <h3 class="heading-title text-primary">Lo que dicen nuestros
+              clientes</h3>
+            <p class="text-body text-body-dark mt-2">Opiniones reales de quienes ya confiaron en nosotros</p>
+          </div>
+          <div id="reviewsGrid" class="grid md:grid-cols-3 gap-6"></div>
+        </div>
+        <div class="text-center mt-8">
+          <a href="https://g.page/r/CTVOsSSo7HAXEBM/" target="_blank" rel="noopener noreferrer"
+            class="text-center justify-center inline-block bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded-full transition-colors">
+            Ver reseñas reales en Google
+          </a>
+        </div>
+      </div>
+
+
+      <!-- Preguntas Frecuentes -->
+      <div class="bg-gray-50 py-10 md:py-16">
+        <div class="container mx-auto px-4 max-w-3xl">
+          <div class="text-center mb-6 md:mb-10">
+            <h3 class="heading-title text-primary">Preguntas Frecuentes</h3>
+            <p class="text-body text-body-dark mt-2">Las dudas más comunes sobre nuestros trámites</p>
+          </div>
+          <div id="faqList" class="space-y-3 sm:space-y-4"></div>
+        </div>
+      </div>
+
+      <!-- Redes sociales (única vez en todo el sitio) -->
+      <div class="bg-gray-100 py-10 md:py-16">
+        <div class="container mx-auto px-4">
+          <div class="text-center mb-6 md:mb-10">
+            <h3 class="heading-title text-primary">Seguinos en nuestras Redes
+            </h3>
+            <p class="text-body text-body-dark mt-2">Mantenete informado sobre nuevos requisitos y noticias
+              del sector</p>
+          </div>
+          <div id="socialsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== NOSOTROS ===== -->
+    <section id="nosotros" class="page-section animate-fade-in hidden">
+      <div class="container mx-auto px-4 py-10 md:py-16 max-w-5xl">
+        <div class="text-center mb-8 md:mb-12">
+          <h1 class="heading-title text-primary">Sobre Nosotros</h1>
+          <div class="w-24 h-1 bg-secondary mx-auto mt-4 rounded"></div>
+        </div>
+        <div class="bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col md:flex-row">
+          <div class="md:w-1/2 p-6 sm:p-8 md:p-12 flex flex-col justify-center">
+            <h3 class="heading-subtitle mb-3 md:mb-4 text-dark">Experiencia y
+              Confianza</h3>
+            <p class="text-body text-body-dark mb-4 md:mb-6">
+              En <strong>Gestoria Integral Tucumán</strong> facilitamos la vida de nuestros clientes.
+              Entendemos que la burocracia puede ser estresante, por eso resolvemos tus trámites con transparencia,
+              rapidez y eficacia.
+            </p>
+            <p class="text-body text-body-dark mb-6 md:mb-10">
+              Nuestro equipo está capacitado y actualizado con las normativas vigentes para asegurarte que cada
+              papel y cada firma estén en el lugar correcto, en el menor tiempo posible.
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start text-base sm:text-lg font-medium text-gray-700">
+                <i class="fa-solid fa-check text-green-500 mr-3 mt-1.5" aria-hidden="true"></i>
+                <strong>Resultados garantizados</strong>
+              </li>
+              <li class="flex items-start text-base sm:text-lg font-medium text-gray-700">
+                <i class="fa-solid fa-check text-green-500 mr-3 mt-1.5" aria-hidden="true"></i>
+                <strong>Atención personalizada en cada trámite</strong>
+              </li>
+              <li class="flex items-start text-base sm:text-lg font-medium text-gray-700">
+                <i class="fa-solid fa-check text-green-500 mr-3 mt-1.5" aria-hidden="true"></i>
+                <strong>Envíos de documentación a todo el país</strong>
+              </li>
+            </ul>
+          </div>
+          <div class="md:w-1/2 bg-gray-200 min-h-[200px] sm:min-h-[260px] md:min-h-[300px] relative">
+            <img
+              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+              alt="Equipo trabajando en gestión documental" class="absolute inset-0 w-full h-full object-cover"
+              loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Contador -->
+      <div class="bg-secundary text-white py-10 md:py-14">
+        <div class="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center max-w-4xl">
+          <div>
+            <p class="text-3xl md:text-4xl font-bold text-secondary"><span data-counter="100" data-suffix="+">0</span>
+            </p>
+            <p class="text-primary font-bold mt-2 text-sm uppercase tracking-widest">Opiniones positivas en Google</p>
+          </div>
+          <div>
+            <p class="text-3xl md:text-4xl font-bold text-secondary">100%</p>
+            <p class="text-primary font-bold mt-2 text-sm uppercase tracking-widest">Gestión transparente</p>
+          </div>
+          <div>
+            <p class="text-3xl md:text-4xl font-bold text-secondary">TODA</p>
+            <p class="text-primary font-bold  mt-2 text-sm uppercase tracking-widest">La provincia de Tucumán</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MENSAJERÍA JUDICIAL Y ADMINISTRATIVA ===== -->
+    <section id="mensajeria" class="page-section animate-fade-in hidden">
+      <!-- Hero -->
+      <div class="bg-primary text-white py-10 md:py-16 lg:py-20 relative overflow-hidden">
+        <div class="absolute inset-0 hero-mensajeria" aria-hidden="true"></div>
+        <i class="absolute -right-10 -bottom-14 text-[220px] text-white/5" aria-hidden="true"></i>
+        <div class="container mx-auto px-4 relative z-10">
+          <div class="max-w-3xl">
+            <span
+              class="inline-flex items-center gap-1 bg-white/10 text-secondary text-xs font-bold uppercase tracking-widest px-3 py-1.5 mb-4 rounded-full">
+              <i class="fa-solid" aria-hidden="true"></i> Servicio especial
+            </span>
+            <h1 class="heading-title mb-3 md:mb-4">Mensajería
+              Judicial y Administrativa</h1>
+            <p class="text-body text-blue-100 mb-6 md:mb-8">
+              Diligenciamiento y traslado de documentación con la urgencia, la responsabilidad y la confidencialidad
+              que tu estudio o empresa necesitan.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <a href="https://wa.me/543814963423?text=Hola!%20Quisiera%20solicitar%20el%20servicio%20de%20mensajer%C3%ADa%20judicial%2Fadministrativa."
+                target="_blank" rel="noopener noreferrer"
+                class="mensajeria-pulse inline-flex items-center justify-center gap-2 text-sm sm:text-base bg-secondary text-dark font-bold px-6 py-3 rounded-full shadow-lg hover:bg-yellow-400 transition-transform hover:scale-105">
+                Solicitar gestión <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+              </a>
+              <a href="#mensajeriaServicios" data-navigate="mensajeria"
+                class="inline-flex items-center justify-center gap-2 text-sm sm:text-base border border-white/30 text-white font-medium px-6 py-3 rounded-full hover:bg-white/10 transition-colors">
+                Ver servicios <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Servicios incluidos -->
+      <div id="mensajeriaServicios" class="container mx-auto px-4 py-10 md:py-16">
+        <div class="text-center mb-8 md:mb-12" data-reveal>
+          <h3 class="heading-title text-primary">Qué incluye el servicio</h3>
+          <div class="w-24 h-1 bg-secondary mx-auto mt-4 rounded"></div>
+          <p class="text-body-dark mt-4 max-w-2xl mx-auto text-body">
+            Un circuito completo de diligenciamiento, pensado para estudios jurídicos, escribanías, contadores,
+            PyMEs y particulares.
+          </p>
+        </div>
+        <div id="mensajeriaServicesGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </div>
+
+      <!-- Cómo funciona: timeline -->
+      <div class="bg-white py-12 md:py-20 border-y border-gray-100">
+        <div class="container mx-auto px-4 max-w-5xl">
+          <div class="text-center mb-10 md:mb-14" data-reveal>
+            <h3 class="heading-title text-primary">¿Cómo funciona? - 4 pasos
+              para la confirmación</h3>
+            <div class="w-24 h-1 bg-secondary mx-auto mt-4 rounded"></div>
+          </div>
+          <div id="mensajeriaTimeline" class="mensajeria-timeline flex flex-col md:flex-row gap-8 md:gap-6 xl:gap-8">
+          </div>
+        </div>
+      </div>
+
+      <!-- Seguimiento en tiempo real -->
+      <div class="bg-gray-50 py-12 md:py-20">
+        <div class="container mx-auto px-4 max-w-5xl">
+          <div class="text-center mb-8 md:mb-12" data-reveal>
+            <span
+              class="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
+              <i class="fa-solid fa-satellite-dish" aria-hidden="true"></i> Seguimiento en vivo
+            </span>
+            <h3 class="heading-title text-primary">Seguí a tu mensajero en
+              tiempo real</h3>
+            <p class="text-body-dark mt-3 max-w-2xl mx-auto text-body">
+              Apenas retiramos tu documentación te compartimos un enlace de seguimiento: vas a poder ver la
+              ubicación del mensajero y el estado de tu trámite en cada etapa.
+            </p>
+          </div>
+
+          <div id="mensajeriaTracking"
+            class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden md:flex" data-reveal>
+            <!-- Mapa ilustrativo -->
+            <div class="relative md:w-3/5 bg-blue-50 p-4 md:p-6">
+              <div class="tracking-map relative rounded-2xl overflow-hidden bg-white border border-gray-100">
+                <svg viewBox="0 0 600 320" class="tracking-map-svg" role="img"
+                  aria-label="Mapa ilustrativo del recorrido del mensajero, desde el punto de retiro hasta el destino">
+                  <g class="tracking-streets" stroke="#e2e8f0" stroke-width="10" fill="none">
+                    <path d="M0,60 H600" />
+                    <path d="M0,150 H600" />
+                    <path d="M0,240 H600" />
+                    <path d="M90,0 V320" />
+                    <path d="M260,0 V320" />
+                    <path d="M430,0 V320" />
+                    <path d="M540,0 V320" />
+                  </g>
+                  <path class="tracking-route" d="M90,240 C 160,240 180,150 260,150 S 380,60 430,60 S 520,60 540,150"
+                    fill="none" />
+                </svg>
+
+                <div class="tracking-pin tracking-pin--origin">
+                  <span class="tracking-pin-icon"><i class="fa-solid fa-building" aria-hidden="true"></i></span>
+                  <span class="tracking-pin-label">Tu estudio</span>
+                </div>
+                <div class="tracking-pin tracking-pin--destination">
+                  <span class="tracking-pin-icon"><i class="fa-solid fa-landmark" aria-hidden="true"></i></span>
+                  <span class="tracking-pin-label">Organismo</span>
+                </div>
+
+                <div id="trackingCourier" class="tracking-courier">
+                  <span class="tracking-courier-pulse" aria-hidden="true"></span>
+                  <i class="fa-solid fa-motorcycle" aria-hidden="true"></i>
+                </div>
+              </div>
+
+              <button type="button" id="trackingReplay"
+                class="mt-4 inline-flex items-center gap-2 text-xs md:text-sm font-semibold text-primary hover:text-blue-800 transition-colors">
+                <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Repetir simulación
+              </button>
+              <p class="text-[11px] text-gray-400 mt-2 max-w-sm">
+                * Recorrido ilustrativo. Al iniciar tu trámite te enviamos el enlace real de seguimiento.
+              </p>
+            </div>
+
+            <!-- Panel de estado -->
+            <div class="md:w-2/5 p-6 md:p-8 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-6">
+                  <div>
+                    <p class="text-xs md:text-[11px] uppercase tracking-widest text-gray-400 font-bold">Trámite</p>
+                    <p class="text-sm font-bold text-dark">Seguimiento de ejemplo</p>
+                  </div>
+                  <span
+                    class="inline-flex items-center gap-1.5 bg-secondary/15 text-dark text-xs font-bold px-3 py-1.5 rounded-full">
+                    <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                    <span id="trackingEtaValue">12</span> min
+                  </span>
+                </div>
+
+                <ol id="trackingSteps" class="space-y-5"></ol>
+              </div>
+
+              <a href="https://wa.me/543814963423?text=Hola!%20Quisiera%20saber%20m%C3%A1s%20sobre%20el%20seguimiento%20en%20tiempo%20real%20del%20mensajero."
+                target="_blank" rel="noopener noreferrer"
+                class="mt-8 inline-flex items-center justify-center gap-2 bg-primary text-white font-bold px-6 py-3 rounded-full hover:bg-blue-800 transition-transform hover:scale-105 text-sm">
+                Quiero seguimiento en tiempo real <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tiempos, zonas y trazabilidad -->
+      <div class="bg-primary py-10 md:py-16">
+        <div class="container mx-auto px-4 max-w-5xl">
+          <div class="text-center mb-6 md:mb-10" data-reveal>
+            <h3 class="heading-title text-white">Tiempos, cobertura y
+              trazabilidad</h3>
+            <p class="text-blue-100 mt-2 text-body">La información que necesitás antes de pedir la
+              gestión</p>
+          </div>
+          <div id="mensajeriaFeaturesGrid" class="grid sm:grid-cols-3 gap-6"></div>
+        </div>
+      </div>
+
+      <!-- Cotizador interactivo -->
+      <div class="py-10 md:py-16">
+        <div class="container mx-auto px-4 max-w-5xl">
+          <div class="text-center mb-8 md:mb-12" data-reveal>
+            <span
+              class="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
+              <i class="fa-solid fa-calculator" aria-hidden="true"></i> Cotización instantánea
+            </span>
+            <h3 class="heading-title text-primary">Cotizá tu gestión al
+              instante</h3>
+            <p class="text-body-dark mt-3 max-w-2xl mx-auto text-body">
+              Elegí el tipo de servicio, la zona y la urgencia: el precio estimado se actualiza automáticamente.
+            </p>
+          </div>
+
+          <div id="cotizador"
+            class="bg-white rounded-3xl shadow-lg border border-gray-100 p-4 sm:p-6 md:p-10 grid md:grid-cols-5 gap-6 md:gap-10"
+            data-reveal>
+            <!-- Formulario -->
+            <div class="md:col-span-3 space-y-6">
+              <div>
+                <label for="cotServicio" class="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-2">Tipo
+                  de
+                  servicio</label>
+                <select id="cotServicio"
+                  class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-base sm:text-sm font-medium text-dark focus:border-primary focus:outline-none transition-colors">
+                </select>
+              </div>
+
+              <div>
+                <span class="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-2">Origen y
+                  destino</span>
+                <div class="inline-flex rounded-full bg-gray-100 p-1 mb-3 gap-1" role="group"
+                  aria-label="Modo de cálculo de distancia">
+                  <button type="button" data-modo="zona"
+                    class="cotizador-toggle-btn is-active text-xs font-semibold px-3 sm:px-4 py-2.5 rounded-full transition-colors">Zona
+                    fija</button>
+                  <button type="button" data-modo="km"
+                    class="cotizador-toggle-btn text-xs font-semibold px-3 sm:px-4 py-2.5 rounded-full transition-colors">Kilómetros
+                    aprox.</button>
+                </div>
+                <select id="cotZona"
+                  class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-base sm:text-sm font-medium text-dark focus:border-primary focus:outline-none transition-colors">
+                </select>
+                <input id="cotKm" type="number" min="0" step="1" inputmode="numeric" placeholder="Ej: 8"
+                  class="hidden w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-base sm:text-sm font-medium text-dark focus:border-primary focus:outline-none transition-colors" />
+              </div>
+
+              <div>
+                <span class="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-2">Nivel de
+                  urgencia</span>
+                <div id="cotUrgenciaGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3" role="group"
+                  aria-label="Nivel de urgencia"></div>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-6">
+                <div>
+                  <label for="cotEspera"
+                    class="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-2">Espera estimada
+                    en dependencias</label>
+                  <select id="cotEspera"
+                    class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-base sm:text-sm font-medium text-dark focus:border-primary focus:outline-none transition-colors">
+                  </select>
+                </div>
+                <div>
+                  <label for="cotAdicional"
+                    class="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-2">Bulto /
+                    documentación pesada</label>
+                  <select id="cotAdicional"
+                    class="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-base sm:text-sm font-medium text-dark focus:border-primary focus:outline-none transition-colors">
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resultado -->
+            <div class="md:col-span-2">
+              <div
+                class="bg-gray-50 rounded-2xl p-5 sm:p-6 h-full flex flex-col justify-between border border-gray-100">
+                <div>
+                  <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Desglose estimado</p>
+                  <dl id="cotBreakdown" class="space-y-2 text-sm text-gray-600"></dl>
+                  <div class="border-t border-gray-200 mt-4 pt-4 flex items-baseline justify-between">
+                    <span class="text-sm font-bold text-dark">Total estimado</span>
+                    <span id="cotTotal"
+                      class="text-xl sm:text-2xl md:text-3xl font-bold leading-tight text-primary">$0</span>
+                  </div>
+                  <p class="text-[11px] text-gray-400 mt-2">* Cotización orientativa, sujeta a confirmación
+                    final.</p>
+                </div>
+
+                <a id="cotWhatsappBtn" href="#" target="_blank" rel="noopener noreferrer"
+                  class="mt-6 inline-flex items-center justify-center gap-2 bg-secondary text-dark font-bold px-6 py-3 rounded-full shadow-lg hover:bg-yellow-400 transition-transform hover:scale-105 text-sm">
+                  Confirmar y solicitar por WhatsApp <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Confidencialidad -->
+      <div class="container mx-auto px-4 py-10 md:py-16 max-w-5xl">
+        <div
+          class="bg-dark text-white rounded-3xl shadow-lg p-6 sm:p-8 md:p-12 flex flex-col md:flex-row items-center text-center md:text-left gap-5 md:gap-8"
+          data-reveal>
+          <div
+            class="mensajeria-float shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-secondary/15 text-secondary flex items-center justify-center text-3xl">
+            <i class="fa-solid fa-user-secret" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h3 class="heading-subtitle mb-3">Confidencialidad, siempre</h3>
+            <p class="text-body text-gray-300">
+              Documentación sensible, expedientes judiciales y datos personales se manejan bajo cadena de custodia
+              documentada, con personal capacitado y comunicación reservada en cada etapa del trámite.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA final -->
+      <div class="bg-secondary/10 py-10 md:py-16">
+        <div class="container mx-auto px-4 max-w-3xl text-center" data-reveal>
+          <h3 class="heading-title text-primary mb-3">¿Necesitás diligenciar
+            un trámite hoy?</h3>
+          <p class="text-body-dark mb-8 text-body">
+            Contanos qué necesitás presentar o retirar y coordinamos el servicio express o programado que
+            corresponda.
+          </p>
+          <div class="flex flex-col sm:flex-row sm:justify-center gap-3">
+            <a href="https://wa.me/543814963423?text=Hola!%20Quisiera%20solicitar%20el%20servicio%20de%20mensajer%C3%ADa%20judicial%2Fadministrativa."
+              target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 bg-secondary text-dark font-bold px-5 py-3 text-sm sm:text-base justify-center rounded-full shadow-sm hover:bg-yellow-400 transition-transform hover:scale-105">
+              Escribinos por WhatsApp <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+            </a>
+            <a href="https://forms.gle/35eRVdvUvqd9Fq5N8" target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 bg-primary text-white font-bold px-5 py-3 text-sm sm:text-base justify-center rounded-full shadow-sm hover:bg-blue-800 transition-transform hover:scale-105">
+              Formulario de pedidos urgentes <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PEDIDO DE PARTIDAS ===== -->
+    <section id="partidas" class="page-section animate-fade-in hidden">
+      <div class="container mx-auto px-4 py-10 md:py-16 max-w-5xl">
+        <div class="text-center mb-8 md:mb-12">
+          <h1 class="heading-title text-primary">Pedido de Partidas</h1>
+          <div class="w-24 h-1 bg-secondary mx-auto mt-4 rounded"></div>
+          <p class="text-body-dark mt-4 max-w-2xl mx-auto text-body">
+            Para poder procesar su solicitud de partidas, necesitamos que complete el formulario de pedidos. Esto nos
+            permitirá recopilar la información necesaria para brindarle un servicio eficiente y preciso. Recuerde que
+            para pedidos urgentes se precisan todos los datos del documento a solicitar, de lo contrario no se podrá
+            realizar la gestión.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col md:flex-row">
+          <div class="md:w-1/2 p-6 sm:p-8 md:p-12 flex flex-col justify-center">
+            <h3 class="heading-subtitle mb-3 md:mb-4 text-dark">Formulario de
+              pedidos</h3>
+            <p class="text-body text-body-dark mb-4 md:mb-6">
+              Haz click en el botón de abajo para acceder al formulario de pedidos de partidas.
+              Completá todos los campos requeridos para que podamos procesar tu solicitud de manera eficiente y precisa.
+            </p>
+            <a href="https://forms.gle/35eRVdvUvqd9Fq5N8" target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center justify-center w-fit bg-secondary text-dark font-bold text-sm sm:text-base px-5 py-3 rounded-full shadow-md hover:bg-yellow-400 transition-transform hover:scale-105">
+              Pedir partidas urgentes
+            </a>
+          </div>
+          <div class="md:w-1/2 bg-gray-200 min-h-[200px] sm:min-h-[260px] md:min-h-[300px] relative">
+            <img src="Imagenes/portada.jpeg" alt="Formulario de pedido de partidas"
+              class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+
+      <!--Division-->
+
+      <div class="container mx-auto px-4 py-10 md:py-16 max-w-6xl">
+        <!-- Encabezado -->
+        <div class="text-center mb-8 md:mb-12">
+          <span
+            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-primary border border-blue-100 mb-3">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Canales Oficiales
+          </span>
+          <h2 class="heading-title text-dark">Contacto Directo
+          </h2>
+          <p class="text-body-dark mt-2 text-body max-w-lg mx-auto">
+            Ante cualquier consulta sobre trámites, actas o gestiones, comunicate con nosotros.
+          </p>
+        </div>
+        <!-- Grilla de Canales de Contacto -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+          <!-- 1. WhatsApp (Canal Principal Destacado) -->
+          <a href="https://wa.me/543814963423" target="_blank" rel="noopener noreferrer"
+            class="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-emerald-200 transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div
+                  class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
+                  <!-- SVG de WhatsApp integrado -->
+                  <svg class="w-6 h-6 fill-current" viewBox="0 0 28 28" aria-hidden="true">
+                    <path
+                      d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                  </svg>
+                </div>
+                <span
+                  class="text-[11px] font-bold uppercase tracking-wider text-gray-400 bg-emerald-50 px-2.5 py-1 rounded-full">
+                  Respuesta &lt; 1 hs
+                </span>
+              </div>
+
+              <h3 class="font-bold text-dark text-lg group-hover:text-emerald-600 transition-colors">WhatsApp</h3>
+              <p class="text-sm font-medium text-gray-700 mt-1 truncate">+54 3814 963423</p>
+              <p class="text-xs text-gray-400 mt-1">Mensajes directos y consultas rápidas</p>
+            </div>
+
+            <div
+              class="mt-6 pt-4 border-t border-gray-100 flex items-center text-xs font-bold text-emerald-600 group-hover:translate-x-1 transition-transform">
+              <span>Iniciar conversación</span>
+              <i class="fa-solid fa-arrow-right ml-2 text-xs" aria-hidden="true"></i>
+            </div>
+          </a>
+          <!-- 2. Email Directo -->
+          <a href="mailto:gestoriaintegraltuc@gmail.com"
+            class="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div
+                  class="w-12 h-12 rounded-xl bg-blue-50 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                  <i class="fa-solid fa-envelope text-xl" aria-hidden="true"></i>
+                </div>
+                <span class="text-[11px] font-medium text-gray-400 bg-gray-50 px-2.5 py-1 rounded-full">
+                  Respuesta &lt; 24 hs
+                </span>
+              </div>
+
+              <h3 class="font-bold text-dark text-lg group-hover:text-primary transition-colors">Email Directo</h3>
+              <p class="text-sm font-medium text-gray-700 mt-1 truncate">gestoriaintegraltuc@gmail.com</p>
+              <p class="text-xs text-gray-400 mt-1">Envío de documentación y presupuestos</p>
+            </div>
+
+            <div
+              class="mt-6 pt-4 border-t border-gray-100 flex items-center text-xs font-bold text-primary group-hover:translate-x-1 transition-transform">
+              <span>Enviar un correo</span>
+              <i class="fa-solid fa-arrow-right ml-2 text-xs" aria-hidden="true"></i>
+            </div>
+          </a>
+
+          <!-- 3. Ubicación -->
+          <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
+                  <i class="fa-solid fa-location-dot text-xl" aria-hidden="true"></i>
+                </div>
+                <span class="text-[11px] font-medium text-slate-500 bg-slate-50 px-2.5 py-1 rounded-full">
+                  Tucumán
+                </span>
+              </div>
+
+              <h3 class="font-bold text-dark text-lg">Ubicación</h3>
+              <p class="text-sm font-semibold text-gray-700 mt-1">San Miguel de Tucumán</p>
+              <p class="text-xs text-gray-400 mt-1">Departamento Capital, Tucumán, Argentina</p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-gray-100 flex items-center text-xs font-medium text-gray-400">
+              <i class="fa-solid fa-building-columns mr-1.5 text-xs" aria-hidden="true"></i>
+              <span>Gestoría registral y judicial</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Imagen visual + Redes Sociales -->
+      <div class="container mx-auto px-4 pb-10 md:pb-16 max-w-6xl space-y-6">
+        <!-- Banner con Imagen -->
+        <div class="relative overflow-hidden rounded-2xl shadow-sm border border-gray-100 h-44 sm:h-56 group">
+          <img src="Imagenes/documentacionantigua.jpg" alt="Atención Gestoría"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent flex flex-col justify-end p-6 text-white">
+            <span class="text-xs font-semibold uppercase tracking-wider text-blue-300">Gestoría Integral
+              Tucumán</span>
+            <h3 class="heading-subtitle mt-1">Búsqueda de documentación histórica</h3>
+          </div>
+        </div>
+
+        <!-- Redes Sociales -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+          <h4 class="font-bold text-dark mb-1">Redes Sociales</h4>
+          <p class="text-xs text-gray-500 mb-4">Mantenete informado sobre nuestras novedades y servicios</p>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <a href="https://www.instagram.com/gestoriaintegraltuc/" target="_blank" rel="noopener noreferrer"
+              class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-pink-50 hover:text-pink-600 text-gray-700 transition-all border border-gray-100 group">
+              <i
+                class="fa-brands fa-instagram text-xl mr-3 text-pink-500 group-hover:scale-110 transition-transform"></i>
+              <span class="text-sm font-medium">Instagram</span>
+            </a>
+
+            <a href="https://www.facebook.com/gestoriaintegraltuc/" target="_blank" rel="noopener noreferrer"
+              class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-blue-50 hover:text-blue-600 text-gray-700 transition-all border border-gray-100 group">
+              <i
+                class="fa-brands fa-facebook text-xl mr-3 text-blue-600 group-hover:scale-110 transition-transform"></i>
+              <span class="text-sm font-medium">Facebook</span>
+            </a>
+
+            <a href="#inicio" target="_blank" rel="noopener noreferrer"
+              class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-sky-50 hover:text-sky-600 text-gray-700 transition-all border border-gray-100 group">
+              <i class="fa-brands fa-tiktok text-xl mr-3 text-sky-500 group-hover:scale-110 transition-transform"></i>
+              <span class="text-sm font-medium">TikTok - proximamente</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+
+      <!-- Columna 1: Marca e Información -->
+      <div class="footer-col">
+        <h3 class="footer-brand">
+          <span class="icon"></span> Gestoria Integral
+          Tucumán
+        </h3>
+        <p class="footer-info">
+          San Miguel de Tucumán, Tucumán, Argentina<br>
+          Teléfono: +54 3814 963423<br>
+          Email: gestoriaintegraltuc@gmail.com
+      </div>
+
+      <!-- Columna 2: Enlaces Rápidos -->
+      <div class="footer-col">
+        <h3>Enlaces Rápidos</h3>
+        <ul class="footer-links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#nosotros">Sobre Nosotros</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="imagenes/POLÍTICA DE PRIVACIDAD Y PROTECCIÓN DE DATOS PERSONALES.pdf" target="_blank"
+              rel="noopener noreferrer">Política de Privacidad</a></li>
+          <li><a href="imagenes/TÉRMINOS Y CONDICIONES DE CONTRATACIÓN DEL SERVICIO.pdf" target="_blank"
+              rel="noopener noreferrer">Términos y Condiciones</a></li>
+          <li><a href="imagenes/PREGUNTAS FRECUENTES.pdf" target="_blank" rel="noopener noreferrer">Preguntas
+              Frecuentes</a></li>
+          <li><a href="#partidas">Partidas Urgentes</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Boletín Informativo -->
+      <div class="footer-col">
+        <h3>Boletín Informativo</h3>
+        <p>Suscribite para recibir novedades y alertas de vencimientos.</p>
+        <form id="newsletterForm" class="newsletter-form">
+          <input id="newsletterEmail" type="email" name="email" placeholder="Correo Electrónico" required />
+          <button type="submit">Suscribirme</button>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Pie de página inferior -->
+    <div class="footer-bottom">
+      <p>Copyright © 2026 Jorge Federico Díaz - Tucumán Argentina</p>
+    </div>
+  </footer>
+  <script src="main.js" type="module"></script>
+</body>
+
+</html>
