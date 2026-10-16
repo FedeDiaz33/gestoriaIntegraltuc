@@ -10,7 +10,7 @@ const waLink = (msg) =>
   `https://wa.me/${WHATSAPP_NUMBER}${msg ? "?text=" + encodeURIComponent(msg) : ""}`;
 
 /* ============ 1b. TARIFAS DEL COTIZADOR (editá acá los valores monetarios) ============ */
-document.addEventListener("DOMContentLoaded", () => {
+function initCotizador() {
   // 1. Configuración de tarifas y opciones
   const CONFIG = {
     servicios: {
@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cotTotal = document.getElementById("cotTotal");
   const cotWhatsappBtn = document.getElementById("cotWhatsappBtn");
   const toggleBtns = document.querySelectorAll(".cotizador-toggle-btn");
+  if (!cotServicio || !cotZona || !cotKm) return;
 
   // 3. Estado interno
   let modoDistancia = "zona"; // 'zona' o 'km'
@@ -112,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <span class="cotizador-urgencia-icon w-8 h-8 rounded-full flex items-center justify-center text-xs shrink-0">
               <i class="fa-solid ${item.icon}"></i>
             </span>
-            <span class="text-xs font-semibold text-gray-700">${item.label}</span>
+            <span class="text-xs sm:text-sm font-semibold text-gray-700">${item.label}</span>
           </button>
         `;
       })
@@ -177,9 +178,9 @@ document.addEventListener("DOMContentLoaded", () => {
     cotBreakdown.innerHTML = itemsDesglose
       .map(
         (item) => `
-        <div class="flex justify-between items-center py-1 border-b border-gray-100 last:border-0">
-          <dt class="pr-2 text-gray-500">${item.label}</dt>
-          <dd class="font-semibold text-gray-800">${formatMoney(item.val)}</dd>
+        <div class="flex justify-between items-start gap-3 py-1.5 border-b border-gray-100 last:border-0">
+          <dt class="min-w-0 break-words text-gray-500">${item.label}</dt>
+          <dd class="shrink-0 whitespace-nowrap font-semibold text-gray-800">${formatMoney(item.val)}</dd>
         </div>
       `,
       )
@@ -245,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Inicialización
   initSelects();
   calcularCotizacion();
-});
+}
 
 const SERVICES = [
   {
@@ -272,7 +273,7 @@ const REVIEWS = [
   {
     name: "Valentín González",
     initial: "V",
-    bg: "bg-primary",
+    bg: "bg-primary text-white",
     text: "Excelente atención, rapidez y profesionalismo. Me ayudaron con todo el papelerío del auto sin complicaciones.",
   },
   {
@@ -284,7 +285,7 @@ const REVIEWS = [
   {
     name: "Cristian M.",
     initial: "C",
-    bg: "bg-dark",
+    bg: "bg-dark text-white",
     text: "Solucionaron un problema registral que venía arrastrando hace meses. Gestión impecable y comunicación constante.",
   },
 ];
@@ -460,37 +461,72 @@ const FAQ = [
 ];
 
 /* ============ 2. NAVEGACIÓN (SPA) ============ */
-function navigate(pageId) {
-  document.querySelectorAll(".page-section").forEach((section) => {
-    section.classList.add("hidden");
-    section.classList.remove("block");
-  });
-
-  const target = document.getElementById(pageId);
-  if (target) {
-    target.classList.remove("hidden");
-    target.classList.add("block");
-  }
-
+function setActiveNav(pageId) {
   document.querySelectorAll(".nav-link").forEach((link) => {
     const active = link.dataset.page === pageId;
     link.classList.toggle("text-primary", active);
     link.classList.toggle("border-primary", active);
+    link.classList.toggle("text-gray-600", !active);
+    link.classList.toggle("border-transparent", !active);
+    if (active) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
   });
+  document.querySelectorAll(".nav-link-m").forEach((link) => {
+    const active = link.dataset.page === pageId;
+    link.classList.toggle("text-primary", active);
+    link.classList.toggle("bg-blue-50", active);
+    link.classList.toggle("text-gray-600", !active);
+  });
+}
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
+function navigate(pageId, anchorId) {
+  const target = document.getElementById(pageId);
+  if (!target || !target.classList.contains("page-section")) return;
+
+  document.querySelectorAll(".page-section").forEach((section) => {
+    section.classList.add("hidden");
+    section.classList.remove("block");
+  });
+  target.classList.remove("hidden");
+  target.classList.add("block");
+
+  setActiveNav(pageId);
+
+  const anchor = anchorId ? document.getElementById(anchorId) : null;
+  if (anchor && target.contains(anchor)) {
+    anchor.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+function setMobileMenu(open) {
+  const menu = document.getElementById("mobileMenu");
+  const btn = document.querySelector("[data-toggle-menu]");
+  if (!menu) return;
+  menu.classList.toggle("hidden", !open);
+  if (btn) {
+    btn.setAttribute("aria-expanded", String(open));
+    btn.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+  }
 }
 
 function toggleMobileMenu() {
-  document.getElementById("mobileMenu")?.classList.toggle("hidden");
+  const menu = document.getElementById("mobileMenu");
+  setMobileMenu(menu ? menu.classList.contains("hidden") : false);
 }
 
 // Delegación de eventos: un solo listener en vez de onclick="" repetido en cada botón
 document.addEventListener("click", (e) => {
   const navTarget = e.target.closest("[data-navigate]");
   if (navTarget) {
-    navigate(navTarget.dataset.navigate);
-    document.getElementById("mobileMenu")?.classList.add("hidden");
+    const href = navTarget.getAttribute("href") || "";
+    const hash = href.startsWith("#") ? href.slice(1) : "";
+    // En enlaces <a> se evita el salto nativo al ancla (la sección puede estar oculta)
+    if (navTarget.tagName === "A") e.preventDefault();
+    const page = navTarget.dataset.navigate;
+    navigate(page, hash && hash !== page ? hash : undefined);
+    setMobileMenu(false);
     return;
   }
   if (e.target.closest("[data-toggle-menu]")) {
@@ -498,22 +534,37 @@ document.addEventListener("click", (e) => {
   }
 });
 
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") setMobileMenu(false);
+});
+
+// Si se abre un enlace directo (index.html#partidas), muestra esa sección
+function initInitialRoute() {
+  const id = window.location.hash.slice(1);
+  const el = id ? document.getElementById(id) : null;
+  if (el && el.classList.contains("page-section")) navigate(id);
+}
+
 /* ============ 3. RENDER DE COMPONENTES POR DATOS ============ */
 function renderServices() {
   const el = document.getElementById("servicesGrid");
   if (!el) return;
   el.innerHTML = SERVICES.map(
     (s) => `
-    <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-gray-100 text-center">
-      <div class="w-16 h-16 bg-blue-50 text-primary rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">
-        <i class="fa-solid ${s.icon}" aria-hidden="true"></i>
+    <div class="bg-white p-5 sm:p-6 lg:p-8 rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-gray-100 text-center flex flex-col justify-between">
+      <div>
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-blue-50 text-primary rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 text-2xl sm:text-3xl">
+          <i class="fa-solid ${s.icon}" aria-hidden="true"></i>
+        </div>
+        <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3 break-words">${s.title}</h3>
+        <p class="text-gray-600 text-sm sm:text-base leading-relaxed">${s.text}</p>
       </div>
-      <h4 class="text-xl font-bold mb-3">${s.title}</h4>
-      <p class="text-gray-600">${s.text}</p>
-      <a href="${waLink(s.msg)}" target="_blank" rel="noopener noreferrer"
-        class="inline-block mt-6 bg-secondary text-dark font-bold px-4 py-2 rounded-full shadow-lg hover:bg-yellow-400 transition-transform hover:scale-105">
-        Cotizar trámite <i class="fa-brands fa-whatsapp ml-2" aria-hidden="true"></i>
-      </a>
+      <div>
+        <a href="${waLink(s.msg)}" target="_blank" rel="noopener noreferrer"
+          class="inline-block mt-5 sm:mt-6 bg-secondary text-dark font-bold text-sm sm:text-base px-5 py-2.5 rounded-full shadow-lg hover:bg-yellow-400 transition-transform hover:scale-105">
+          Cotizar trámite <i class="fa-brands fa-whatsapp ml-2" aria-hidden="true"></i>
+        </a>
+      </div>
     </div>`,
   ).join("");
 }
@@ -523,23 +574,23 @@ function renderReviews() {
   if (!el) return;
   el.innerHTML = REVIEWS.map(
     (r) => `
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+    <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
       <div>
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 ${r.bg} rounded-full flex items-center justify-center font-bold" aria-hidden="true">
+          <div class="w-10 h-10 shrink-0 ${r.bg} rounded-full flex items-center justify-center font-bold" aria-hidden="true">
             ${r.initial}
           </div>
-          <div>
-            <h5 class="font-semibold text-sm">${r.name}</h5>
-            <div class="flex text-secondary text-[10px]" aria-label="5 de 5 estrellas">
+          <div class="min-w-0">
+            <h4 class="font-semibold text-sm sm:text-base break-words">${r.name}</h4>
+            <div class="flex text-secondary text-[10px] sm:text-xs" aria-label="5 de 5 estrellas">
               ${'<i class="fa-solid fa-star" aria-hidden="true"></i>'.repeat(5)}
             </div>
           </div>
           <i class="fa-brands fa-google text-gray-300 ml-auto" aria-hidden="true"></i>
         </div>
-        <p class="text-sm text-gray-600 leading-relaxed italic">&ldquo;${r.text}&rdquo;</p>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed italic">&ldquo;${r.text}&rdquo;</p>
       </div>
-      <p class="text-[10px] text-gray-400 mt-4 uppercase tracking-widest">Reseña verificada</p>
+      <p class="text-[10px] sm:text-xs text-gray-400 mt-4 uppercase tracking-widest">Reseña verificada</p>
     </div>`,
   ).join("");
 }
@@ -550,13 +601,13 @@ function renderSocials() {
   el.innerHTML = SOCIALS.map(
     (s) => `
     <a href="${s.url}" target="_blank" rel="noopener noreferrer"
-      class="social-card bg-white p-6 rounded-2xl shadow-sm flex items-center gap-4 hover:shadow-md transition-all">
-      <div class="social-icon w-12 h-12 ${s.bg} text-white rounded-xl flex items-center justify-center text-2xl transition-transform">
+      class="social-card bg-white p-4 sm:p-6 rounded-2xl shadow-sm flex items-center gap-4 hover:shadow-md transition-all">
+      <div class="social-icon shrink-0 w-12 h-12 ${s.bg} text-white rounded-xl flex items-center justify-center text-2xl transition-transform">
         <i class="fa-brands ${s.icon}" aria-hidden="true"></i>
       </div>
-      <div>
+      <div class="min-w-0">
         <h4 class="font-bold text-dark">${s.name}</h4>
-        <p class="text-xs text-gray-500">${s.handle}</p>
+        <p class="text-xs sm:text-sm text-gray-500 break-words">${s.handle}</p>
       </div>
     </a>`,
   ).join("");
@@ -570,12 +621,12 @@ function renderMensajeriaServices() {
   el.innerHTML = MENSAJERIA_SERVICES.map(
     (s, i) => `
     <div data-reveal data-reveal-index="${i}"
-      class="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 transition-all hover:-translate-y-1">
+      class="group bg-white p-5 sm:p-6 rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 transition-all hover:-translate-y-1">
       <div class="w-12 h-12 bg-blue-50 text-primary rounded-xl flex items-center justify-center mb-4 text-lg transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
         <i class="fa-solid ${s.icon}" aria-hidden="true"></i>
       </div>
-      <h4 class="text-base font-bold mb-2 text-dark">${s.title}</h4>
-      <p class="text-sm text-gray-600 leading-relaxed">${s.text}</p>
+      <h4 class="text-base sm:text-lg font-bold mb-2 text-dark break-words">${s.title}</h4>
+      <p class="text-sm sm:text-base text-gray-600 leading-relaxed">${s.text}</p>
     </div>`,
   ).join("");
 }
@@ -591,8 +642,8 @@ function renderMensajeriaSteps() {
       </div>
       <div class="md:px-3">
         <p class="text-[11px] font-bold uppercase tracking-widest text-secondary mb-1">Paso ${i + 1}</p>
-        <h4 class="text-sm font-bold text-dark mb-1">${s.title}</h4>
-        <p class="text-xs text-gray-600 leading-relaxed md:max-w-[180px] md:mx-auto">${s.text}</p>
+        <h4 class="text-base md:text-sm lg:text-base font-bold text-dark mb-1">${s.title}</h4>
+        <p class="text-sm md:text-xs lg:text-sm text-gray-600 leading-relaxed md:max-w-[200px] md:mx-auto">${s.text}</p>
       </div>
     </div>`,
   ).join("");
@@ -603,12 +654,12 @@ function renderMensajeriaFeatures() {
   if (!el) return;
   el.innerHTML = MENSAJERIA_FEATURES.map(
     (f, i) => `
-    <div data-reveal data-reveal-index="${i}" class="bg-white/5 border border-white/10 rounded-2xl p-6 text-white">
+    <div data-reveal data-reveal-index="${i}" class="bg-white/5 border border-white/10 rounded-2xl p-5 sm:p-6 text-white">
       <div class="w-10 h-10 bg-secondary/20 text-secondary rounded-lg flex items-center justify-center mb-4 text-base">
         <i class="fa-solid ${f.icon}" aria-hidden="true"></i>
       </div>
-      <h4 class="text-sm font-bold mb-2">${f.title}</h4>
-      <p class="text-xs text-blue-100 leading-relaxed">${f.text}</p>
+      <h4 class="text-base font-bold mb-2">${f.title}</h4>
+      <p class="text-sm text-blue-100 leading-relaxed">${f.text}</p>
     </div>`,
   ).join("");
 }
@@ -624,7 +675,7 @@ function renderTrackingSteps() {
       </span>
       <span>
         <span class="tracking-step-title block text-sm font-bold text-gray-400 transition-colors">${s.title}</span>
-        <span class="block text-xs text-gray-500 leading-relaxed">${s.text}</span>
+        <span class="block text-xs sm:text-sm text-gray-500 leading-relaxed">${s.text}</span>
       </span>
     </li>`,
   ).join("");
@@ -748,10 +799,10 @@ function initNewsCarousel() {
   track.innerHTML = NEWS.map(
     (n) => `
     <div class="carousel-slide px-1">
-      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-10 h-full">
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-8 md:p-10 h-full">
         <span class="inline-block text-xs font-bold uppercase tracking-widest text-secondary bg-primary/5 px-3 py-1 rounded-full mb-4">${n.tag}</span>
-        <h4 class="text-xl font-bold text-dark mb-2">${n.title}</h4>
-        <p class="text-gray-600 leading-relaxed">${n.text}</p>
+        <h4 class="text-lg sm:text-xl font-bold text-dark mb-2 break-words">${n.title}</h4>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">${n.text}</p>
       </div>
     </div>`,
   ).join("");
@@ -769,8 +820,11 @@ function initNewsCarousel() {
     });
   }
 
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   function play() {
     stop();
+    if (reduceMotion) return;
     timer = setInterval(() => goTo(index + 1), 6000);
   }
   function stop() {
@@ -792,6 +846,34 @@ function initNewsCarousel() {
     play();
   });
 
+  // Swipe táctil (la CSP no permite handlers inline, se registra acá)
+  const viewport = root.querySelector(".carousel-viewport");
+  let touchX = null;
+  let touchY = null;
+  viewport?.addEventListener(
+    "touchstart",
+    (e) => {
+      touchX = e.touches[0].clientX;
+      touchY = e.touches[0].clientY;
+      stop();
+    },
+    { passive: true },
+  );
+  viewport?.addEventListener(
+    "touchend",
+    (e) => {
+      if (touchX === null) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      const dy = e.changedTouches[0].clientY - touchY;
+      touchX = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        goTo(index + (dx < 0 ? 1 : -1));
+      }
+      play();
+    },
+    { passive: true },
+  );
+
   root.addEventListener("mouseenter", stop);
   root.addEventListener("mouseleave", play);
   root.addEventListener("focusin", stop);
@@ -809,13 +891,13 @@ function initFaq() {
   el.innerHTML = FAQ.map(
     (item, i) => `
     <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden" data-open="false">
-      <button type="button" class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-6 py-5 font-semibold text-dark"
+      <button type="button" class="faq-toggle w-full flex items-center justify-between gap-4 text-left px-4 sm:px-6 py-4 sm:py-5 text-sm sm:text-base font-semibold text-dark"
         aria-expanded="false" aria-controls="faq-answer-${i}">
-        <span>${item.q}</span>
+        <span class="min-w-0 break-words">${item.q}</span>
         <i class="fa-solid fa-chevron-down faq-chevron text-secondary" aria-hidden="true"></i>
       </button>
       <div class="faq-answer" id="faq-answer-${i}">
-        <div class="px-6 pb-5 text-gray-600 leading-relaxed">${item.a}</div>
+        <div class="px-4 sm:px-6 pb-4 sm:pb-5 text-sm sm:text-base text-gray-600 leading-relaxed">${item.a}</div>
       </div>
     </div>`,
   ).join("");
@@ -867,6 +949,7 @@ function initCounters() {
 
 /* ============ 9. INIT ============ */
 document.addEventListener("DOMContentLoaded", () => {
+  initCotizador();
   renderServices();
   renderReviews();
   renderSocials();
@@ -880,6 +963,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initCounters();
   initScrollReveal();
   initNewsletterForm();
+  initInitialRoute();
 });
 
 /* ============ 10. NEWSLETTER ============

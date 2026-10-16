@@ -34,9 +34,7 @@
   <!--Letras de google-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
@@ -57,7 +55,7 @@
   </script>
 </head>
 
-<body class="bg-[#F7F5F0] text-gray-800 flex flex-col min-h-screen font-sans">
+<body class="bg-[#F7F5F0] text-gray-800 flex flex-col min-h-screen font-sans overflow-x-hidden">
 
   <!-- Agregamos la clase animate-bounce -->
   <a href="https://wa.me/543814963423?text=Hola!%20Me%20gustar%C3%ADa%20consultar%20por%20un%20tr%C3%A1mite."
@@ -68,7 +66,7 @@
 
   <!-- Navbar -->
   <header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-4 py-2 sm:py-3 flex justify-between items-center">
+    <div class="container mx-auto px-4 sm:px-6 md:px-8 py-2 sm:py-3 flex justify-between items-center">
       <button data-navigate="inicio" class="flex items-center gap-2 sm:gap-3 min-w-0">
         <img src="Imagenes/logo2.png" alt="Logo Gestoría Integral" class="w-10 h-10 sm:w-12 sm:h-12 shrink-0" />
         <span class="text-left">
@@ -98,7 +96,8 @@
       </button>
     </div>
 
-    <nav id="mobileMenu" class="hidden bg-white border-t border-gray-100 md:hidden absolute w-full shadow-lg"
+    <nav id="mobileMenu"
+      class="hidden bg-white border-t border-gray-100 md:hidden absolute w-full max-h-[calc(100vh-4rem)] overflow-y-auto shadow-lg"
       aria-label="Menú móvil">
       <button data-navigate="inicio" data-page="inicio"
         class="nav-link-m block w-full text-left px-5 py-3.5 text-base font-medium border-b border-gray-100 text-primary bg-blue-50 hover:bg-gray-50">Inicio</button>
@@ -112,15 +111,15 @@
     </nav>
   </header>
 
-  <main class="flex-grow">
+  <main class="flex-grow w-full max-w-full overflow-x-hidden">
     <!-- ===== INICIO ===== -->
-    <section id="inicio" class="page-section animate-fade-in block">
+    <section id="inicio" class="page-section animate-fade-in block w-full max-w-full overflow-x-hidden">
       <div class="bg-primary text-white py-10 md:py-16 lg:py-20 relative overflow-hidden">
         <div class="absolute inset-0 hero-background" aria-hidden="true"></div>
         <div
-          class="container mx-auto px-4 relative z-10 text-center md:text-left grid md:grid-cols-2 gap-8 items-center">
+          class="container mx-auto px-4 sm:px-6 md:px-8 relative z-10 text-center md:text-left grid md:grid-cols-2 gap-8 items-center">
           <div>
-            <h1 class="heading-title mb-3 md:mb-4">Soluciones
+            <h1 class="heading-hero mb-3 md:mb-4">Soluciones
               ágiles para tus trámites</h1>
             <p class="text-body text-blue-100 mb-6 md:mb-8">
               Especialistas en gestiones registrales y administrativas en toda la provincia de Tucumán.<br
@@ -137,7 +136,7 @@
       </div>
 
       <!-- Requisitos -->
-      <div class="container mx-auto px-4 py-10 md:py-16 max-w-5xl">
+      <div class="container mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-16 max-w-5xl">
         <div class="text-center mb-8 md:mb-12">
           <h2 class="heading-title text-primary">Requisitos para cotizar</h2>
           <div class="w-24 h-1 bg-secondary mx-auto mt-4 rounded"></div>
@@ -162,22 +161,24 @@
             </a>
           </div>
           <div class="md:w-1/2 bg-gray-200 min-h-[200px] sm:min-h-[260px] md:min-h-[300px] relative">
-            <img src="Imagenes/Cotizaciones.jpg" self="data" alt="Oficina de la gestoría"
+            <img src="Imagenes/Cotizaciones.jpg" alt="Oficina de la gestoría"
               class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
           </div>
         </div>
       </div>
 
       <!-- Servicios (renderizado por JS desde main.js) -->
-      <div class="container mx-auto px-4 py-10 md:py-16">
-        <h3 class="heading-title text-center text-primary mb-8 md:mb-12">
-          Nuestros Servicios</h3>
-        <div id="servicesGrid" class="grid md:grid-cols-3 gap-4"></div>
+      <div class="container mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-16">
+        <h2 class="heading-title text-center text-primary mb-6 md:mb-12">Nuestros Servicios</h2>
+
+        <!-- Móvil: carrusel con scroll y snap · md+: grilla de 3 columnas -->
+        <div id="servicesGrid" class="card-row card-row--md-3 scrollbar-none">
+        </div>
       </div>
 
       <!-- Novedades: carrusel -->
       <div class="bg-white py-10 md:py-16 border-y border-gray-100">
-        <div class="container mx-auto px-4 max-w-4xl">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8 max-w-4xl">
           <div class="text-center mb-6 md:mb-10">
             <h3 class="heading-title text-primary">Novedades y Vencimientos
             </h3>
@@ -187,14 +188,14 @@
           <div id="newsCarousel" role="region" aria-label="Carrusel de novedades" aria-roledescription="carrusel">
             <div class="flex items-center gap-2 sm:gap-4">
               <button type="button" data-prev aria-label="Novedad anterior"
-                class="shrink-0 w-8 h-8 sm:w-10 sm:h-10 text-xs sm:text-base rounded-full bg-gray-100 hover:bg-secondary hover:text-dark transition-colors flex items-center justify-center">
+                class="hidden sm:flex shrink-0 w-10 h-10 text-base rounded-full bg-gray-100 hover:bg-secondary hover:text-dark transition-colors items-center justify-center">
                 <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
               </button>
-              <div class="flex-1 min-w-0 overflow-hidden rounded-2xl">
+              <div class="carousel-viewport flex-1 min-w-0 overflow-hidden rounded-2xl">
                 <div class="carousel-track"></div>
               </div>
               <button type="button" data-next aria-label="Siguiente novedad"
-                class="shrink-0 w-8 h-8 sm:w-10 sm:h-10 text-xs sm:text-base rounded-full bg-gray-100 hover:bg-secondary hover:text-dark transition-colors flex items-center justify-center">
+                class="hidden sm:flex shrink-0 w-10 h-10 text-base rounded-full bg-gray-100 hover:bg-secondary hover:text-dark transition-colors items-center justify-center">
                 <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
               </button>
             </div>
@@ -205,17 +206,17 @@
 
       <!-- Reseñas -->
       <div class="bg-white py-10 md:py-16 border-y border-gray-100">
-        <div class="container mx-auto px-4 max-w-5xl">
-          <div class="https://g.page/r/CTVOsSSo7HAXEBM/review">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8 max-w-5xl">
+          <div class="text-center mb-6 md:mb-10">
             <h3 class="heading-title text-primary">Lo que dicen nuestros
               clientes</h3>
             <p class="text-body text-body-dark mt-2">Opiniones reales de quienes ya confiaron en nosotros</p>
           </div>
-          <div id="reviewsGrid" class="grid md:grid-cols-3 gap-6"></div>
+          <div id="reviewsGrid" class="card-row card-row--md-3 scrollbar-none"></div>
         </div>
-        <div class="text-center mt-8">
+        <div class="text-center mt-6 md:mt-8 px-4">
           <a href="https://g.page/r/CTVOsSSo7HAXEBM/" target="_blank" rel="noopener noreferrer"
-            class="text-center justify-center inline-block bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded-full transition-colors">
+            class="text-center justify-center inline-block bg-primary hover:bg-secondary text-white font-bold text-sm sm:text-base py-2.5 px-5 rounded-full transition-colors">
             Ver reseñas reales en Google
           </a>
         </div>
@@ -224,7 +225,7 @@
 
       <!-- Preguntas Frecuentes -->
       <div class="bg-gray-50 py-10 md:py-16">
-        <div class="container mx-auto px-4 max-w-3xl">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8 max-w-3xl">
           <div class="text-center mb-6 md:mb-10">
             <h3 class="heading-title text-primary">Preguntas Frecuentes</h3>
             <p class="text-body text-body-dark mt-2">Las dudas más comunes sobre nuestros trámites</p>
@@ -235,7 +236,7 @@
 
       <!-- Redes sociales (única vez en todo el sitio) -->
       <div class="bg-gray-100 py-10 md:py-16">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8">
           <div class="text-center mb-6 md:mb-10">
             <h3 class="heading-title text-primary">Seguinos en nuestras Redes
             </h3>
@@ -248,8 +249,8 @@
     </section>
 
     <!-- ===== NOSOTROS ===== -->
-    <section id="nosotros" class="page-section animate-fade-in hidden">
-      <div class="container mx-auto px-4 py-10 md:py-16 max-w-5xl">
+    <section id="nosotros" class="page-section animate-fade-in hidden w-full max-w-full overflow-x-hidden">
+      <div class="container mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-16 max-w-5xl">
         <div class="text-center mb-8 md:mb-12">
           <h1 class="heading-title text-primary">Sobre Nosotros</h1>
           <div class="w-24 h-1 bg-secondary mx-auto mt-4 rounded"></div>
@@ -268,15 +269,15 @@
               papel y cada firma estén en el lugar correcto, en el menor tiempo posible.
             </p>
             <ul class="space-y-3">
-              <li class="flex items-start text-base sm:text-lg font-medium text-gray-700">
+              <li class="flex items-start text-sm sm:text-base md:text-lg font-medium text-gray-700">
                 <i class="fa-solid fa-check text-green-500 mr-3 mt-1.5" aria-hidden="true"></i>
                 <strong>Resultados garantizados</strong>
               </li>
-              <li class="flex items-start text-base sm:text-lg font-medium text-gray-700">
+              <li class="flex items-start text-sm sm:text-base md:text-lg font-medium text-gray-700">
                 <i class="fa-solid fa-check text-green-500 mr-3 mt-1.5" aria-hidden="true"></i>
                 <strong>Atención personalizada en cada trámite</strong>
               </li>
-              <li class="flex items-start text-base sm:text-lg font-medium text-gray-700">
+              <li class="flex items-start text-sm sm:text-base md:text-lg font-medium text-gray-700">
                 <i class="fa-solid fa-check text-green-500 mr-3 mt-1.5" aria-hidden="true"></i>
                 <strong>Envíos de documentación a todo el país</strong>
               </li>
@@ -292,38 +293,49 @@
       </div>
 
       <!-- Contador -->
-      <div class="bg-secundary text-white py-10 md:py-14">
-        <div class="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center max-w-4xl">
+      <div class="bg-white border-y border-gray-100 py-10 md:py-14">
+        <div
+          class="container mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 md:gap-8 text-center max-w-4xl">
           <div>
-            <p class="text-3xl md:text-4xl font-bold text-secondary"><span data-counter="100" data-suffix="+">0</span>
+            <p class="text-3xl sm:text-4xl font-bold text-secondary"><span data-counter="100" data-suffix="+">0</span>
             </p>
-            <p class="text-primary font-bold mt-2 text-sm uppercase tracking-widest">Opiniones positivas en Google</p>
+            <p class="text-primary font-bold mt-2 text-xs sm:text-sm uppercase tracking-wider md:tracking-widest">
+              Opiniones positivas en Google</p>
           </div>
           <div>
-            <p class="text-3xl md:text-4xl font-bold text-secondary">100%</p>
-            <p class="text-primary font-bold mt-2 text-sm uppercase tracking-widest">Gestión transparente</p>
+            <p class="text-3xl sm:text-4xl font-bold text-secondary">100%</p>
+            <p class="text-primary font-bold mt-2 text-xs sm:text-sm uppercase tracking-wider md:tracking-widest">
+              Gestión transparente</p>
           </div>
           <div>
-            <p class="text-3xl md:text-4xl font-bold text-secondary">TODA</p>
-            <p class="text-primary font-bold  mt-2 text-sm uppercase tracking-widest">La provincia de Tucumán</p>
+            <p class="text-3xl sm:text-4xl font-bold text-secondary">TODA</p>
+            <p class="text-primary font-bold mt-2 text-xs sm:text-sm uppercase tracking-wider md:tracking-widest">La
+              provincia de Tucumán</p>
           </div>
+        </div><br>
+        <!--Reseñas en google-->
+        <div class="text-center mt-6 md:mt-8 px-4">
+          <a href="https://g.page/r/CTVOsSSo7HAXEBM/" target="_blank" rel="noopener noreferrer"
+            class="text-center justify-center inline-block bg-primary hover:bg-secondary text-white font-bold text-sm sm:text-base py-2.5 px-5 rounded-full transition-colors">
+            Ver reseñas reales en Google
+          </a>
         </div>
+
       </div>
     </section>
 
     <!-- ===== MENSAJERÍA JUDICIAL Y ADMINISTRATIVA ===== -->
-    <section id="mensajeria" class="page-section animate-fade-in hidden">
+    <section id="mensajeria" class="page-section animate-fade-in hidden w-full max-w-full overflow-x-hidden">
       <!-- Hero -->
       <div class="bg-primary text-white py-10 md:py-16 lg:py-20 relative overflow-hidden">
         <div class="absolute inset-0 hero-mensajeria" aria-hidden="true"></div>
-        <i class="absolute -right-10 -bottom-14 text-[220px] text-white/5" aria-hidden="true"></i>
-        <div class="container mx-auto px-4 relative z-10">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8 relative z-10">
           <div class="max-w-3xl">
             <span
               class="inline-flex items-center gap-1 bg-white/10 text-secondary text-xs font-bold uppercase tracking-widest px-3 py-1.5 mb-4 rounded-full">
               <i class="fa-solid" aria-hidden="true"></i> Servicio especial
             </span>
-            <h1 class="heading-title mb-3 md:mb-4">Mensajería
+            <h1 class="heading-hero mb-3 md:mb-4">Mensajería
               Judicial y Administrativa</h1>
             <p class="text-body text-blue-100 mb-6 md:mb-8">
               Diligenciamiento y traslado de documentación con la urgencia, la responsabilidad y la confidencialidad
@@ -345,7 +357,7 @@
       </div>
 
       <!-- Servicios incluidos -->
-      <div id="mensajeriaServicios" class="container mx-auto px-4 py-10 md:py-16">
+      <div id="mensajeriaServicios" class="container mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-16">
         <div class="text-center mb-8 md:mb-12" data-reveal>
           <h3 class="heading-title text-primary">Qué incluye el servicio</h3>
           <div class="w-24 h-1 bg-secondary mx-auto mt-4 rounded"></div>
@@ -354,12 +366,12 @@
             PyMEs y particulares.
           </p>
         </div>
-        <div id="mensajeriaServicesGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        <div id="mensajeriaServicesGrid" class="card-row card-row--sm-2 scrollbar-none"></div>
       </div>
 
       <!-- Cómo funciona: timeline -->
       <div class="bg-white py-12 md:py-20 border-y border-gray-100">
-        <div class="container mx-auto px-4 max-w-5xl">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8 max-w-5xl">
           <div class="text-center mb-10 md:mb-14" data-reveal>
             <h3 class="heading-title text-primary">¿Cómo funciona? - 4 pasos
               para la confirmación</h3>
@@ -372,7 +384,7 @@
 
       <!-- Seguimiento en tiempo real -->
       <div class="bg-gray-50 py-12 md:py-20">
-        <div class="container mx-auto px-4 max-w-5xl">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8 max-w-5xl">
           <div class="text-center mb-8 md:mb-12" data-reveal>
             <span
               class="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
@@ -387,9 +399,9 @@
           </div>
 
           <div id="mensajeriaTracking"
-            class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden md:flex" data-reveal>
+            class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden lg:flex" data-reveal>
             <!-- Mapa ilustrativo -->
-            <div class="relative md:w-3/5 bg-blue-50 p-4 md:p-6">
+            <div class="relative lg:w-3/5 bg-blue-50 p-3 sm:p-4 md:p-6">
               <div class="tracking-map relative rounded-2xl overflow-hidden bg-white border border-gray-100">
                 <svg viewBox="0 0 600 320" class="tracking-map-svg" role="img"
                   aria-label="Mapa ilustrativo del recorrido del mensajero, desde el punto de retiro hasta el destino">
@@ -431,7 +443,7 @@
             </div>
 
             <!-- Panel de estado -->
-            <div class="md:w-2/5 p-6 md:p-8 flex flex-col justify-between">
+            <div class="lg:w-2/5 p-5 sm:p-6 md:p-8 flex flex-col justify-between">
               <div>
                 <div class="flex items-center justify-between mb-6">
                   <div>
@@ -460,20 +472,20 @@
 
       <!-- Tiempos, zonas y trazabilidad -->
       <div class="bg-primary py-10 md:py-16">
-        <div class="container mx-auto px-4 max-w-5xl">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8 max-w-5xl">
           <div class="text-center mb-6 md:mb-10" data-reveal>
             <h3 class="heading-title text-white">Tiempos, cobertura y
               trazabilidad</h3>
             <p class="text-blue-100 mt-2 text-body">La información que necesitás antes de pedir la
               gestión</p>
           </div>
-          <div id="mensajeriaFeaturesGrid" class="grid sm:grid-cols-3 gap-6"></div>
+          <div id="mensajeriaFeaturesGrid" class="feature-grid"></div>
         </div>
       </div>
 
       <!-- Cotizador interactivo -->
       <div class="py-10 md:py-16">
-        <div class="container mx-auto px-4 max-w-5xl">
+        <div class="container mx-auto px-4 sm:px-6 md:px-8 max-w-5xl">
           <div class="text-center mb-8 md:mb-12" data-reveal>
             <span
               class="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
@@ -487,10 +499,10 @@
           </div>
 
           <div id="cotizador"
-            class="bg-white rounded-3xl shadow-lg border border-gray-100 p-4 sm:p-6 md:p-10 grid md:grid-cols-5 gap-6 md:gap-10"
+            class="bg-white rounded-3xl shadow-lg border border-gray-100 p-4 sm:p-6 md:p-8 lg:p-10 grid lg:grid-cols-5 gap-6 lg:gap-10"
             data-reveal>
             <!-- Formulario -->
-            <div class="md:col-span-3 space-y-6">
+            <div class="lg:col-span-3 space-y-5 sm:space-y-6">
               <div>
                 <label for="cotServicio" class="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-2">Tipo
                   de
@@ -547,7 +559,7 @@
             </div>
 
             <!-- Resultado -->
-            <div class="md:col-span-2">
+            <div class="lg:col-span-2">
               <div
                 class="bg-gray-50 rounded-2xl p-5 sm:p-6 h-full flex flex-col justify-between border border-gray-100">
                 <div>
@@ -556,7 +568,7 @@
                   <div class="border-t border-gray-200 mt-4 pt-4 flex items-baseline justify-between">
                     <span class="text-sm font-bold text-dark">Total estimado</span>
                     <span id="cotTotal"
-                      class="text-xl sm:text-2xl md:text-3xl font-bold leading-tight text-primary">$0</span>
+                      class="text-xl sm:text-2xl lg:text-3xl font-bold leading-tight text-primary">$0</span>
                   </div>
                   <p class="text-[11px] text-gray-400 mt-2">* Cotización orientativa, sujeta a confirmación
                     final.</p>
@@ -573,7 +585,7 @@
       </div>
 
       <!-- Confidencialidad -->
-      <div class="container mx-auto px-4 py-10 md:py-16 max-w-5xl">
+      <div class="container mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-16 max-w-5xl">
         <div
           class="bg-dark text-white rounded-3xl shadow-lg p-6 sm:p-8 md:p-12 flex flex-col md:flex-row items-center text-center md:text-left gap-5 md:gap-8"
           data-reveal>
@@ -593,7 +605,7 @@
 
       <!-- CTA final -->
       <div class="bg-secondary/10 py-10 md:py-16">
-        <div class="container mx-auto px-4 max-w-3xl text-center" data-reveal>
+        <div class="container mx-auto px-4 sm:px-6 md:px-8 max-w-3xl text-center" data-reveal>
           <h3 class="heading-title text-primary mb-3">¿Necesitás diligenciar
             un trámite hoy?</h3>
           <p class="text-body-dark mb-8 text-body">
@@ -616,8 +628,8 @@
     </section>
 
     <!-- ===== PEDIDO DE PARTIDAS ===== -->
-    <section id="partidas" class="page-section animate-fade-in hidden">
-      <div class="container mx-auto px-4 py-10 md:py-16 max-w-5xl">
+    <section id="partidas" class="page-section animate-fade-in hidden w-full max-w-full overflow-x-hidden">
+      <div class="container mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-16 max-w-5xl">
         <div class="text-center mb-8 md:mb-12">
           <h1 class="heading-title text-primary">Pedido de Partidas</h1>
           <div class="w-24 h-1 bg-secondary mx-auto mt-4 rounded"></div>
@@ -652,7 +664,7 @@
 
       <!--Division-->
 
-      <div class="container mx-auto px-4 py-10 md:py-16 max-w-6xl">
+      <div id="contacto" class="container mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-16 max-w-6xl">
         <!-- Encabezado -->
         <div class="text-center mb-8 md:mb-12">
           <span
@@ -667,10 +679,10 @@
           </p>
         </div>
         <!-- Grilla de Canales de Contacto -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-stretch">
           <!-- 1. WhatsApp (Canal Principal Destacado) -->
           <a href="https://wa.me/543814963423" target="_blank" rel="noopener noreferrer"
-            class="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-emerald-200 transition-all duration-300 flex flex-col justify-between">
+            class="group bg-white p-5 sm:p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-emerald-200 transition-all duration-300 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4">
                 <div
@@ -688,7 +700,7 @@
               </div>
 
               <h3 class="font-bold text-dark text-lg group-hover:text-emerald-600 transition-colors">WhatsApp</h3>
-              <p class="text-sm font-medium text-gray-700 mt-1 truncate">+54 3814 963423</p>
+              <p class="text-sm font-medium text-gray-700 mt-1 break-words">+54 3814 963423</p>
               <p class="text-xs text-gray-400 mt-1">Mensajes directos y consultas rápidas</p>
             </div>
 
@@ -700,7 +712,7 @@
           </a>
           <!-- 2. Email Directo -->
           <a href="mailto:gestoriaintegraltuc@gmail.com"
-            class="group bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300 flex flex-col justify-between">
+            class="group bg-white p-5 sm:p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4">
                 <div
@@ -713,7 +725,7 @@
               </div>
 
               <h3 class="font-bold text-dark text-lg group-hover:text-primary transition-colors">Email Directo</h3>
-              <p class="text-sm font-medium text-gray-700 mt-1 truncate">gestoriaintegraltuc@gmail.com</p>
+              <p class="text-sm font-medium text-gray-700 mt-1 break-words">gestoriaintegraltuc@gmail.com</p>
               <p class="text-xs text-gray-400 mt-1">Envío de documentación y presupuestos</p>
             </div>
 
@@ -725,7 +737,7 @@
           </a>
 
           <!-- 3. Ubicación -->
-          <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
+          <div class="bg-white p-5 sm:p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-4">
                 <div class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center">
@@ -750,13 +762,13 @@
       </div>
 
       <!-- Imagen visual + Redes Sociales -->
-      <div class="container mx-auto px-4 pb-10 md:pb-16 max-w-6xl space-y-6">
+      <div class="container mx-auto px-4 sm:px-6 md:px-8 pb-10 md:pb-16 max-w-6xl space-y-6">
         <!-- Banner con Imagen -->
-        <div class="relative overflow-hidden rounded-2xl shadow-sm border border-gray-100 h-44 sm:h-56 group">
+        <div class="relative overflow-hidden rounded-2xl shadow-sm border border-gray-100 h-44 sm:h-56 md:h-64 group">
           <img src="Imagenes/documentacionantigua.jpg" alt="Atención Gestoría"
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
           <div
-            class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent flex flex-col justify-end p-6 text-white">
+            class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent flex flex-col justify-end p-4 sm:p-6 text-white">
             <span class="text-xs font-semibold uppercase tracking-wider text-blue-300">Gestoría Integral
               Tucumán</span>
             <h3 class="heading-subtitle mt-1">Búsqueda de documentación histórica</h3>
@@ -764,30 +776,30 @@
         </div>
 
         <!-- Redes Sociales -->
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+        <div class="bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-gray-100">
           <h4 class="font-bold text-dark mb-1">Redes Sociales</h4>
           <p class="text-xs text-gray-500 mb-4">Mantenete informado sobre nuestras novedades y servicios</p>
 
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <a href="https://www.instagram.com/gestoriaintegraltuc/" target="_blank" rel="noopener noreferrer"
               class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-pink-50 hover:text-pink-600 text-gray-700 transition-all border border-gray-100 group">
-              <i
-                class="fa-brands fa-instagram text-xl mr-3 text-pink-500 group-hover:scale-110 transition-transform"></i>
+              <i class="fa-brands fa-instagram text-xl mr-3 text-pink-500 group-hover:scale-110 transition-transform"
+                aria-hidden="true"></i>
               <span class="text-sm font-medium">Instagram</span>
             </a>
 
             <a href="https://www.facebook.com/gestoriaintegraltuc/" target="_blank" rel="noopener noreferrer"
               class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-blue-50 hover:text-blue-600 text-gray-700 transition-all border border-gray-100 group">
-              <i
-                class="fa-brands fa-facebook text-xl mr-3 text-blue-600 group-hover:scale-110 transition-transform"></i>
+              <i class="fa-brands fa-facebook text-xl mr-3 text-blue-600 group-hover:scale-110 transition-transform"
+                aria-hidden="true"></i>
               <span class="text-sm font-medium">Facebook</span>
             </a>
 
-            <a href="#inicio" target="_blank" rel="noopener noreferrer"
-              class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-sky-50 hover:text-sky-600 text-gray-700 transition-all border border-gray-100 group">
-              <i class="fa-brands fa-tiktok text-xl mr-3 text-sky-500 group-hover:scale-110 transition-transform"></i>
-              <span class="text-sm font-medium">TikTok - proximamente</span>
-            </a>
+            <div class="flex items-center p-3 rounded-xl bg-gray-50 text-gray-500 border border-gray-100"
+              aria-disabled="true">
+              <i class="fa-brands fa-tiktok text-xl mr-3 text-gray-400" aria-hidden="true"></i>
+              <span class="text-sm font-medium">TikTok · próximamente</span>
+            </div>
           </div>
         </div>
       </div>
@@ -811,22 +823,23 @@
           San Miguel de Tucumán, Tucumán, Argentina<br>
           Teléfono: +54 3814 963423<br>
           Email: gestoriaintegraltuc@gmail.com
+        </p>
       </div>
 
       <!-- Columna 2: Enlaces Rápidos -->
       <div class="footer-col">
         <h3>Enlaces Rápidos</h3>
         <ul class="footer-links">
-          <li><a href="#inicio">Inicio</a></li>
-          <li><a href="#nosotros">Sobre Nosotros</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="#inicio" data-navigate="inicio">Inicio</a></li>
+          <li><a href="#nosotros" data-navigate="nosotros">Sobre Nosotros</a></li>
+          <li><a href="#contacto" data-navigate="partidas">Contacto</a></li>
           <li><a href="imagenes/POLÍTICA DE PRIVACIDAD Y PROTECCIÓN DE DATOS PERSONALES.pdf" target="_blank"
               rel="noopener noreferrer">Política de Privacidad</a></li>
           <li><a href="imagenes/TÉRMINOS Y CONDICIONES DE CONTRATACIÓN DEL SERVICIO.pdf" target="_blank"
               rel="noopener noreferrer">Términos y Condiciones</a></li>
           <li><a href="imagenes/PREGUNTAS FRECUENTES.pdf" target="_blank" rel="noopener noreferrer">Preguntas
               Frecuentes</a></li>
-          <li><a href="#partidas">Partidas Urgentes</a></li>
+          <li><a href="#partidas" data-navigate="partidas">Partidas Urgentes</a></li>
         </ul>
       </div>
 

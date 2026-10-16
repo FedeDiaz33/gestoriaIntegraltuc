@@ -230,14 +230,8 @@ button:focus-visible {
 /* ---------- Seguimiento en tiempo real del cadete (mapa ilustrativo) ---------- */
 .tracking-map {
   position: relative;
-  aspect-ratio: 16 / 10;
-  min-height: 260px;
-}
-
-@media (min-width: 768px) {
-  .tracking-map {
-    min-height: 320px;
-  }
+  width: 100%;
+  aspect-ratio: 600 / 320;
 }
 
 .tracking-map-svg {
@@ -497,7 +491,7 @@ button:focus-visible {
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
   gap: 28px;
   padding-bottom: 28px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -706,49 +700,229 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Títulos principales (H1 / H2 y títulos de sección) */
+/* Escala equivalente a Tailwind, mobile-first:
+   hero  : text-[1.75rem] sm:text-4xl md:text-[2.5rem] lg:text-5xl
+   title : text-2xl sm:text-3xl md:text-4xl
+   sub   : text-lg  sm:text-xl  md:text-2xl
+   body  : text-sm  sm:text-base                                   */
+.heading-hero,
+.heading-title,
+.heading-subtitle {
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  hyphens: manual;
+}
+
+.heading-hero {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
 .heading-title {
-  font-size: 2.25rem;
-  /* 36px */
+  font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
-/* Subtítulos (H3 / H4) */
 .heading-subtitle {
-  font-size: 1.35rem;
-  /* 21.6px */
+  font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.3;
 }
 
-/* Párrafos */
 .text-body {
   font-size: 0.875rem;
-  /* 15.2px */
   line-height: 1.6;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
 }
 
-/* Color de párrafo sobre fondos claros (no usar sobre fondos oscuros) */
 .text-body-dark {
   color: var(--text-body);
 }
 
-@media (max-width: 768px) {
-  .heading-title {
-    font-size: 1.625rem;
-    /* 26px */
+@media (min-width: 640px) {
+  .heading-hero { font-size: 2.25rem; }
+  .heading-title { font-size: 1.875rem; }
+  .heading-subtitle { font-size: 1.25rem; }
+  .text-body { font-size: 1rem; line-height: 1.65; }
+}
+
+@media (min-width: 768px) {
+  .heading-hero { font-size: 2.5rem; }
+  .heading-title { font-size: 2.25rem; }
+  .heading-subtitle { font-size: 1.5rem; }
+}
+
+@media (min-width: 1024px) {
+  .heading-hero { font-size: 3rem; line-height: 1.1; }
+}
+
+/* ==========================================
+   RESPONSIVE / OVERFLOW
+   ========================================== */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body,
+main,
+.page-section,
+.footer {
+  max-width: 100%;
+}
+
+.footer {
+  overflow-x: clip;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+}
+
+/* Anclas internas: que el header sticky no tape el destino */
+.page-section [id] {
+  scroll-margin-top: 5rem;
+}
+
+/* Carruseles de tarjetas en móvil: sin barra de scroll visible */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Swipe horizontal en el carrusel de novedades sin bloquear el scroll vertical */
+.carousel-viewport {
+  touch-action: pan-y pinch-zoom;
+}
+
+@media (max-width: 639px) {
+  .tracking-pin-icon,
+  .tracking-courier {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
   }
 
-  .heading-subtitle {
-    font-size: 1.15rem;
-    /* 18.4px */
+  .tracking-pin-label {
+    font-size: 9px;
+    padding: 1px 6px;
   }
 
-  .text-body {
-    font-size: 0.9rem;
-    /* 14.4px */
-    line-height: 1.55;
+  /* Evita que la etiqueta del destino se recorte contra el borde derecho */
+  .tracking-pin--destination .tracking-pin-label {
+    transform: translateX(-10px);
+  }
+}
+
+/* ==========================================
+   LAYOUT CRÍTICO (no depende de recompilar Tailwind)
+   ========================================== */
+/* Nada puede ensanchar la página: body se propaga al viewport (html queda visible,
+   así el header sticky sigue funcionando). */
+body {
+  overflow-x: hidden;
+}
+
+main,
+.page-section {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Filas de tarjetas: carrusel con snap en móvil, grilla en escritorio */
+.card-row {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1rem;
+  margin-inline: -1rem;
+  padding: 0.5rem 1rem 1.5rem;
+}
+
+.card-row > * {
+  flex: 0 0 85vw;
+  max-width: 22rem;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 640px) {
+  .card-row {
+    margin-inline: -1.5rem;
+    padding-inline: 1.5rem;
+    scroll-padding-inline: 1.5rem;
+  }
+
+  .card-row > * {
+    flex-basis: 320px;
+  }
+
+  /* Mensajería: 2 columnas desde sm */
+  .card-row--sm-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    overflow: visible;
+    scroll-snap-type: none;
+    margin-inline: 0;
+    padding: 0;
+  }
+
+  .card-row--sm-2 > * {
+    max-width: none;
+  }
+}
+
+@media (min-width: 768px) {
+  /* Servicios y reseñas: 3 columnas desde md */
+  .card-row--md-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    overflow: visible;
+    scroll-snap-type: none;
+    margin-inline: 0;
+    padding: 0;
+  }
+
+  .card-row--md-3 > * {
+    max-width: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-row--md-3 {
+    gap: 2rem;
+  }
+
+  .card-row--sm-2 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Mensajería · tiempos y cobertura: apilado en móvil, 3 columnas desde md */
+.feature-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .feature-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
   }
 }
