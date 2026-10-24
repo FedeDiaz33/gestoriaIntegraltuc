@@ -740,6 +740,16 @@ body {
   overflow-wrap: break-word;
 }
 
+.text-body-nosotros{
+  font-size: 0.870rem;
+  line-height: 1.4;
+}
+
+.font-small-nosotros{
+  font-size: 0.860rem;
+  line-height: 1.4;
+}
+
 .text-body-dark {
   color: var(--text-body);
 }
