@@ -735,12 +735,17 @@ body {
 
 .text-body {
   font-size: 0.875rem;
-  line-height: 1.6;
+  line-height: 1.4;
   text-wrap: pretty;
   overflow-wrap: break-word;
 }
 
 .text-body-nosotros{
+  font-size: 0.870rem;
+  line-height: 1.4;
+}
+
+.text-body-colegio{
   font-size: 0.870rem;
   line-height: 1.4;
 }

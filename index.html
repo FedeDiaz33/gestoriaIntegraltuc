@@ -5,8 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestoría Integral Tucumán | Trámites automotores y administrativos</title>
-  <meta name="description"
-    content="Gestoría Integral en San Miguel de Tucumán: transferencias, patentamientos, trámites administrativos y actas. Gestión rápida, transparente y de confianza." />
+  <meta name="description" content="Gestoría Integral en San Miguel de Tucumán: transferencias, 
+    patentamientos, trámites administrativos y actas. Gestión rápida, 
+    transparente y de confianza." />
 
   <!-- Google Tag Manager -->
   <script>(function (w, d, s, l, i) {
@@ -16,28 +17,23 @@
       }); var f = d.getElementsByTagName(s)[0],
         j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
           'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-PHHS7WM');</script>
+    })(window, document, 'script', 'dataLayer', 'GTM-PHHS7WM');
+  </script>
   <!-- End Google Tag Manager -->
 
   <!-- SEGURIDAD: Referrer Policy -->
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-  <!-- SEGURIDAD: Content Security Policy (meta tag).
-       Nota: esta CSP cubre XSS/inyección de recursos, pero NO puede fijar
-       frame-ancestors (protección anti-clickjacking) ni cabeceras como
-       X-Frame-Options, X-Content-Type-Options o HSTS: esas deben
-       configurarse en el servidor/hosting (ver README de despliegue). -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; 
-  script-src 'self'; 
-  style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; 
-  font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; 
-  img-src 'self' data: https://images.unsplash.com; 
-  connect-src 'self'; 
-  frame-src 'none'; 
-  object-src 'none'; 
-  base-uri 'self'; 
-  form-action 'self'; 
-  upgrade-insecure-requests;" />
+  <!-- SEGURIDAD: Content Security Policy (meta tag)-->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 
+    https://www.googletagmanager.com https://www.google-analytics.com; 
+    style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; 
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; 
+    connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com 
+    https://*.googletagmanager.com https://analytics.google.com; 
+    img-src 'self' data: https://images.unsplash.com 
+    https://*.googletagmanager.com https://*.google-analytics.com; object-src 'none'; base-uri 'self';">
 
   <link rel="apple-touch-icon" href="imagenes/JD3.svg" sizes="180x180" />
   <link rel="icon" href="imagenes/JD3.svg" type="image/svg+xml" sizes="32x32" />
@@ -155,7 +151,6 @@
       <!-- Servicios (renderizado por JS desde main.js) -->
       <div class="container mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-16">
         <h2 class="heading-title text-center text-primary mb-6 md:mb-12">Nuestros Servicios</h2>
-
         <!-- Móvil: carrusel con scroll y snap · md+: grilla de 3 columnas -->
         <div id="servicesGrid" class="card-row card-row--md-3 scrollbar-none">
         </div>
@@ -170,12 +165,12 @@
         <div class="bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col md:flex-row">
           <div class="md:w-1/2 p-6 sm:p-8 md:p-12 flex flex-col justify-center">
             <h3 class="heading-subtitle mb-3 md:mb-4 text-dark">¿NECESITAS COLEGIAR UN 08 O APOSTILLAR DOCUMENTOS?</h3>
-            <p class="text-body text-body-dark mb-4 md:mb-6">
+            <p class="text-body-colegio text-body-dark mb-4 md:mb-6">
               Te ayudamos a gestionar tu trámite de manera rápida y segura. Nuestro equipo de expertos se encargará de
               todo el proceso, asegurando que tu documentación esté en regla y cumpla con los requisitos necesarios.
             </p>
-            <p class="text-body text-body-dark mb-6 md:mb-10">
-             Solo tenes que contactarnos y te guiaremos paso a paso para que tu trámite sea exitoso.
+            <p class="text-body-colegio text-body-dark mb-6 md:mb-10">
+              Solo tenes que contactarnos y te guiaremos paso a paso para que tu trámite sea exitoso.
             </p>
             <a href="https://wa.me/543814963423?text=Hola!%20Me%20gustar%C3%ADa%20consultar%20por%20un%20tr%C3%A1mite."
               target="_blank" rel="noopener noreferrer"
@@ -262,7 +257,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- ===== NOSOTROS ===== -->
     <section id="nosotros" class="page-section animate-fade-in hidden w-full max-w-full overflow-x-hidden">
       <div class="container mx-auto px-4 sm:px-6 md:px-8 py-10 md:py-16 max-w-5xl">
@@ -300,17 +295,15 @@
                 <i class="fa-solid fa-check text-green-500 mr-3 mt-1.5" aria-hidden="true"></i>
                 <strong>Matriculados a nivel nacional</strong>
               </li>
-                <li class="flex items-start text-sm sm:text-base md:text-lg font-small-nosotros text-gray-700">
+              <li class="flex items-start text-sm sm:text-base md:text-lg font-small-nosotros text-gray-700">
                 <i class="fa-solid fa-check text-green-500 mr-3 mt-1.5" aria-hidden="true"></i>
                 <strong>Trabajamos con estudios juridicos y agencias de automotores</strong>
               </li>
             </ul>
           </div>
           <div class="md:w-1/2 bg-gray-200 min-h-[200px] sm:min-h-[260px] md:min-h-[300px] relative">
-            <img
-              src="Imagenes/gestoriageneral.jpeg"
-              alt="Equipo trabajando en gestión documental" class="absolute inset-0 w-full h-full object-cover"
-              loading="lazy" />
+            <img src="Imagenes/gestoriageneral.jpeg" alt="Equipo trabajando en gestión documental"
+              class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
           </div>
         </div>
       </div>
