@@ -456,23 +456,28 @@ button:focus-visible {
 }
 
 .hero-background {
-  background-image: url('Imagenes/portada.jpeg');
-  /* Reemplaza por tu ruta local o URL */
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.89) 0%, rgba(0, 0, 0, 0) 90%), 
+                    url('Imagenes/portada.jpeg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.25;
-  /* Ajusta la transparencia entre 0.1 y 0.5 según tu preferencia */
 }
 
-.hero-mensajeria {
-  background-image: url('Imagenes/motocadete.jpeg');
-  /* Reemplaza por tu ruta local o URL */
+/*
+.hero-background {
+  background-image: url('Imagenes/portada.jpeg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.25;
-  /* Asegura que el contenido esté por encima del fondo */;
+  opacity: 0.75;
+}
+*/
+.hero-mensajeria {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.89) 0%, rgba(0, 0, 0, 0) 90%), 
+                    url('Imagenes/motocadete.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* ==========================================
